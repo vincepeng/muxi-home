@@ -790,6 +790,70 @@
       text-align: center;
     }
 
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .spec-card {
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      border-radius: 30px;
+      background: rgba(255, 250, 241, 0.7);
+      box-shadow: 0 20px 56px rgba(78, 51, 38, 0.12);
+    }
+
+    .spec-card h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .spec-meta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: var(--coffee);
+      background: rgba(182, 129, 82, 0.12);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .track-table {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .track-row {
+      display: grid;
+      grid-template-columns: 1.1fr 1.2fr 1fr;
+      gap: 10px;
+      align-items: center;
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.32);
+    }
+
+    .track-room b,
+    .track-size b,
+    .track-box b {
+      display: block;
+      color: var(--walnut);
+      font-size: 14px;
+    }
+
+    .track-room span,
+    .track-size span,
+    .track-box span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
     .footer {
       margin: 90px 0 40px;
       padding: 28px;
@@ -921,7 +985,8 @@
       .room-grid,
       .shopping-board,
       .smart-home,
-      .install-grid {
+      .install-grid,
+      .spec-grid {
         grid-template-columns: 1fr;
       }
 
@@ -984,6 +1049,10 @@
       .dimension,
       .device-cluster,
       .mijia-shots {
+        grid-template-columns: 1fr;
+      }
+
+      .track-row {
         grid-template-columns: 1fr;
       }
 
@@ -1344,59 +1413,79 @@
         </div>
         <p class="section-note">基于已购买设备截图整理：门锁、路由/网关、灯带、插座、音箱、摄像头等已经形成基础米家体系；科沃斯 X12 Pro 作为客卫上下水扫地机单独记录。</p>
       </div>
-      <div class="smart-home">
-        <article class="install-card">
-          <h3>已接入/已购买的智能设备</h3>
-          <div class="device-cluster">
-            <div class="device-chip"><b>小米智能门锁 M40 Pro</b><span>客厅 / 门锁入口</span></div>
-            <div class="device-chip"><b>科沃斯 X12 Pro 上下水版</b><span>客卫洗手盆下</span></div>
-            <div class="device-chip"><b>小米摄像机 4K</b><span>客厅/电梯口安防</span></div>
-            <div class="device-chip"><b>Xiaomi 智能音箱 Pro</b><span>语音控制入口</span></div>
-            <div class="device-chip"><b>Xiaomi 中枢网关</b><span>米家本地中枢</span></div>
-            <div class="device-chip"><b>智能灯带</b><span>卧室/主卧/阳台/投影区</span></div>
-            <div class="device-chip"><b>智能墙壁插座</b><span>希希房间</span></div>
-            <div class="device-chip"><b>直流变频落地扇 E</b><span>风扇联动场景</span></div>
-          </div>
-        </article>
-        <article class="install-card">
-          <h3>窗帘尺寸表</h3>
-          <ul class="check-list">
-            <li>客厅：L 型轨道 3130mm + 1335mm；科创者电机，布帘双开 2 个电机 + 纱帘 1 个电机。</li>
-            <li>主卧：主轨约 3110mm，另标注 890mm 侧边/回边尺寸；布帘双开 2 个电机 + 纱帘 1 个电机。</li>
-            <li>多功能房：轨道约 1.85m；双层每层单电机；窗帘盒宽度 18cm。</li>
-            <li>老人房：轨道约 2.4m；双层每层单电机；窗帘盒宽度 18cm。</li>
-            <li>儿童房：轨道约 2.13m；双层每层单电机；窗帘盒宽度 19cm。</li>
-            <li>全屋统一：科创者电机，共 12 个；电源侧和安装尺寸继续按现场复尺确认。</li>
-          </ul>
-        </article>
-      </div>
+      <article class="install-card">
+        <h3>已接入/已购买的智能设备</h3>
+        <div class="device-cluster">
+          <div class="device-chip"><b>小米智能门锁 M40 Pro</b><span>客厅 / 门锁入口</span></div>
+          <div class="device-chip"><b>科沃斯 X12 Pro 上下水版</b><span>客卫洗手盆下</span></div>
+          <div class="device-chip"><b>小米摄像机 4K</b><span>客厅/电梯口安防</span></div>
+          <div class="device-chip"><b>Xiaomi 智能音箱 Pro</b><span>语音控制入口</span></div>
+          <div class="device-chip"><b>Xiaomi 中枢网关</b><span>米家本地中枢</span></div>
+          <div class="device-chip"><b>智能灯带</b><span>卧室/主卧/阳台/投影区</span></div>
+          <div class="device-chip"><b>智能墙壁插座</b><span>希希房间</span></div>
+          <div class="device-chip"><b>直流变频落地扇 E</b><span>风扇联动场景</span></div>
+        </div>
+      </article>
     </section>
 
     <section id="install" class="reveal">
       <div class="section-head">
         <div>
           <div class="kicker">Installation Notes</div>
-          <h2>岛台烤箱安装确认</h2>
+          <h2>安装参数卡片</h2>
         </div>
-        <p class="section-note">烤箱位深度比较临界，核心前提是后方不装背板、16A 插座和明装底盒放侧边抽屉柜，避免插头顶住机器。</p>
+        <p class="section-note">把目前最关键的安装信息统一整理成两张卡片：岛台烤箱安装条件，以及全屋窗帘轨道和电机配置，方便下单和现场沟通。</p>
       </div>
-      <div class="install-grid">
-        <article class="install-card">
-          <h3>预留尺寸</h3>
+      <div class="spec-grid">
+        <article class="install-card spec-card">
+          <h3><span>岛台烤箱</span><span class="spec-meta">尺寸已确认</span></h3>
           <div class="dimension">
             <div><b>600</b><span>宽 mm</span></div>
             <div><b>500</b><span>高 mm</span></div>
             <div><b>560</b><span>深 mm</span></div>
           </div>
-        </article>
-        <article class="install-card">
-          <h3>执行要求</h3>
           <ul class="check-list">
             <li>选定型号：博世 W6 天鹅白微蒸烤炸一体机 CPK4R15T8W，机身 595×555×455mm。</li>
             <li>烤箱位后方不装背板，或做大开孔；深度 560mm 才可安全释放。</li>
             <li>16A 插座和明装底盒放旁边抽屉柜，不放机器正后方。</li>
             <li>烤箱柜与旁边抽屉柜之间开走线孔，插座需可触达，方便断电维护。</li>
             <li>上下保留通风/收口空间，避免完全封死。</li>
+          </ul>
+        </article>
+
+        <article class="install-card spec-card">
+          <h3><span>全屋窗帘</span><span class="spec-meta">科创者电机</span></h3>
+          <div class="track-table">
+            <div class="track-row">
+              <div class="track-room"><b>客厅</b><span>布帘双开 2 个 + 纱帘 1 个</span></div>
+              <div class="track-size"><b>3130mm + 1335mm</b><span>L 型轨道</span></div>
+              <div class="track-box"><b>双层窗帘</b><span>客厅主窗</span></div>
+            </div>
+            <div class="track-row">
+              <div class="track-room"><b>主卧</b><span>布帘双开 2 个 + 纱帘 1 个</span></div>
+              <div class="track-size"><b>3110mm + 890mm</b><span>主轨 + 侧边/回边</span></div>
+              <div class="track-box"><b>双层窗帘</b><span>主卧主窗</span></div>
+            </div>
+            <div class="track-row">
+              <div class="track-room"><b>多功能房</b><span>布帘 1 个 + 纱帘 1 个</span></div>
+              <div class="track-size"><b>约 1.85m</b><span>直轨</span></div>
+              <div class="track-box"><b>窗帘盒 18cm</b><span>双层单开</span></div>
+            </div>
+            <div class="track-row">
+              <div class="track-room"><b>老人房</b><span>布帘 1 个 + 纱帘 1 个</span></div>
+              <div class="track-size"><b>约 2.4m</b><span>直轨</span></div>
+              <div class="track-box"><b>窗帘盒 18cm</b><span>双层单开</span></div>
+            </div>
+            <div class="track-row">
+              <div class="track-room"><b>儿童房</b><span>布帘 1 个 + 纱帘 1 个</span></div>
+              <div class="track-size"><b>约 2.13m</b><span>直轨</span></div>
+              <div class="track-box"><b>窗帘盒 19cm</b><span>双层单开</span></div>
+            </div>
+          </div>
+          <ul class="check-list">
+            <li>全屋统一：科创者电机，共 12 个。</li>
+            <li>客厅与主卧已按截图记录尺寸，其余三房按手写记录整理。</li>
+            <li>电源预留方向、安装尺寸、左右回边和最终轨道长度仍以现场复尺为准。</li>
           </ul>
         </article>
       </div>
