@@ -1,0 +1,1297 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>新房装修展示 | 轻中古原木风</title>
+  <style>
+    :root {
+      --cream: #f5efe4;
+      --cream-2: #ebe0cf;
+      --paper: #fffaf1;
+      --wood: #b68152;
+      --walnut: #4e3326;
+      --coffee: #7b5135;
+      --olive: #71824d;
+      --moss: #4d5d36;
+      --ink: #2c261f;
+      --muted: #756b5f;
+      --line: rgba(78, 51, 38, 0.18);
+      --shadow: 0 22px 70px rgba(78, 51, 38, 0.15);
+      --radius-xl: 34px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 10%, rgba(182, 129, 82, 0.18), transparent 26rem),
+        radial-gradient(circle at 88% 18%, rgba(113, 130, 77, 0.14), transparent 24rem),
+        linear-gradient(135deg, var(--cream), #fbf7ee 45%, #efe3d2);
+      font-family: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      line-height: 1.65;
+    }
+
+    body::before {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      content: "";
+      opacity: 0.18;
+      background-image:
+        linear-gradient(rgba(78, 51, 38, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(78, 51, 38, 0.05) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, #000, transparent 80%);
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .nav {
+      position: sticky;
+      top: 16px;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 18px auto 24px;
+      padding: 12px 14px 12px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.56);
+      border-radius: 999px;
+      background: rgba(255, 250, 241, 0.76);
+      box-shadow: 0 16px 50px rgba(78, 51, 38, 0.1);
+      backdrop-filter: blur(18px);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--walnut);
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 35% 35%, #f6e2bd 0 22%, transparent 23%),
+        linear-gradient(145deg, var(--wood), var(--walnut));
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
+    }
+
+    .nav-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .nav-links a {
+      padding: 8px 13px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 13px;
+      text-decoration: none;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--walnut);
+      background: rgba(182, 129, 82, 0.12);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.03fr 0.97fr;
+      min-height: 660px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.64);
+      border-radius: 46px;
+      background: rgba(255, 250, 241, 0.68);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-copy {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: clamp(36px, 6vw, 76px);
+      overflow: hidden;
+    }
+
+    .hero-copy::after {
+      position: absolute;
+      right: -120px;
+      bottom: -120px;
+      width: 360px;
+      height: 360px;
+      border: 1px solid rgba(78, 51, 38, 0.12);
+      border-radius: 50%;
+      content: "";
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 22px;
+      padding: 9px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--coffee);
+      background: rgba(255, 255, 255, 0.45);
+      font-size: 13px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--olive);
+      content: "";
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+      font-family: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+    }
+
+    h1 {
+      max-width: 720px;
+      font-size: clamp(54px, 8vw, 118px);
+      line-height: 0.92;
+      color: var(--walnut);
+    }
+
+    .hero-desc {
+      max-width: 520px;
+      margin: 26px 0 0;
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 18px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--walnut);
+      background: rgba(255, 255, 255, 0.55);
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: 0.22s ease;
+    }
+
+    .button.primary {
+      color: #fffaf1;
+      background: var(--walnut);
+      box-shadow: 0 16px 32px rgba(78, 51, 38, 0.18);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(78, 51, 38, 0.14);
+    }
+
+    .hero-image {
+      position: relative;
+      min-height: 520px;
+      overflow: hidden;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-image::after {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(90deg, rgba(245, 239, 228, 0.32), transparent 42%);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin: 26px 0 0;
+    }
+
+    .stat {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255, 250, 241, 0.62);
+    }
+
+    .stat b {
+      display: block;
+      color: var(--walnut);
+      font-family: "Songti SC", "STSong", serif;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .stat span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    section {
+      margin-top: 86px;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.86fr) minmax(280px, 0.5fr);
+      gap: 34px;
+      align-items: end;
+      margin-bottom: 28px;
+    }
+
+    .kicker {
+      margin-bottom: 10px;
+      color: var(--olive);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      color: var(--walnut);
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1;
+    }
+
+    .section-note {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 18px;
+    }
+
+    .photo-card {
+      position: relative;
+      min-height: 290px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      border-radius: var(--radius-lg);
+      background: #ddd1bf;
+      box-shadow: 0 18px 48px rgba(78, 51, 38, 0.12);
+      cursor: zoom-in;
+    }
+
+    .photo-card:nth-child(1),
+    .photo-card:nth-child(2),
+    .photo-card:nth-child(3) {
+      grid-column: span 4;
+      min-height: 330px;
+    }
+
+    .photo-card:nth-child(4),
+    .photo-card:nth-child(5) {
+      grid-column: span 6;
+      min-height: 360px;
+    }
+
+    .photo-card:nth-child(n+6) {
+      grid-column: span 4;
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .photo-card:hover img {
+      transform: scale(1.055);
+    }
+
+    .photo-label {
+      position: absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.46);
+      border-radius: 999px;
+      color: #fffaf1;
+      background: rgba(44, 38, 31, 0.45);
+      backdrop-filter: blur(14px);
+      font-size: 13px;
+    }
+
+    .style-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 20px;
+    }
+
+    .palette-card,
+    .principle-card,
+    .shopping-column,
+    .install-card,
+    .simple-card {
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      border-radius: var(--radius-xl);
+      background: rgba(255, 250, 241, 0.72);
+      box-shadow: 0 20px 56px rgba(78, 51, 38, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .palette-card {
+      padding: 26px;
+    }
+
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .swatch {
+      min-height: 130px;
+      padding: 14px;
+      border-radius: 22px;
+      color: #fffaf1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .swatch::before {
+      position: absolute;
+      inset: 0;
+      content: "";
+      background: linear-gradient(145deg, rgba(255,255,255,0.18), transparent 50%);
+    }
+
+    .swatch span {
+      position: relative;
+      display: block;
+      font-size: 12px;
+      opacity: 0.86;
+    }
+
+    .swatch b {
+      position: relative;
+      font-size: 17px;
+    }
+
+    .principles {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .principle-card {
+      padding: 22px;
+    }
+
+    .principle-card h3,
+    .shopping-column h3,
+    .install-card h3,
+    .simple-card h3 {
+      color: var(--walnut);
+      font-size: 24px;
+      letter-spacing: -0.03em;
+    }
+
+    .principle-card p,
+    .simple-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .shopping-board {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .room-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .room-card {
+      display: flex;
+      min-height: 320px;
+      flex-direction: column;
+      gap: 16px;
+      padding: 22px;
+      border: 1px solid rgba(255, 255, 255, 0.58);
+      border-radius: var(--radius-xl);
+      background: rgba(255, 250, 241, 0.72);
+      box-shadow: 0 20px 56px rgba(78, 51, 38, 0.1);
+      backdrop-filter: blur(8px);
+    }
+
+    .room-card h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--walnut);
+      font-size: 24px;
+    }
+
+    .room-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .room-tags span {
+      padding: 5px 9px;
+      border-radius: 999px;
+      color: var(--coffee);
+      background: rgba(182, 129, 82, 0.12);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .room-card ul {
+      display: grid;
+      gap: 9px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .room-card li {
+      position: relative;
+      padding-left: 18px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .room-card li::before {
+      position: absolute;
+      left: 0;
+      top: 0.72em;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--olive);
+      content: "";
+    }
+
+    .room-note {
+      margin-top: auto;
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+      color: var(--coffee);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .shopping-column {
+      overflow: hidden;
+      padding: 22px;
+    }
+
+    .shopping-column h3 {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      height: 27px;
+      padding: 0 10px;
+      border-radius: 999px;
+      color: var(--moss);
+      background: rgba(113, 130, 77, 0.14);
+      font-family: "PingFang SC", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .item-list {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .item {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.34);
+    }
+
+    .item-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .item strong {
+      display: block;
+      color: var(--walnut);
+      font-size: 15px;
+    }
+
+    .item small {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .item p {
+      margin: 9px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .item a {
+      flex: 0 0 auto;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #fffaf1;
+      background: var(--coffee);
+      font-size: 12px;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .smart-home {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .device-cluster {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .device-chip {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.34);
+    }
+
+    .device-chip b {
+      display: block;
+      color: var(--walnut);
+      font-size: 14px;
+    }
+
+    .device-chip span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .mijia-shots {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .smart-shot {
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.62);
+      border-radius: 30px;
+      background: rgba(44, 38, 31, 0.08);
+      box-shadow: 0 20px 56px rgba(78, 51, 38, 0.12);
+      cursor: zoom-in;
+    }
+
+    .smart-shot img {
+      width: 100%;
+      height: 520px;
+      object-fit: cover;
+      object-position: top;
+      transition: transform 0.7s cubic-bezier(.2, .8, .2, 1);
+    }
+
+    .smart-shot:hover img {
+      transform: scale(1.035);
+    }
+
+    .install-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 20px;
+    }
+
+    .install-card {
+      padding: 26px;
+    }
+
+    .dimension {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .dimension div {
+      padding: 18px 12px;
+      border-radius: 20px;
+      text-align: center;
+      background: rgba(182, 129, 82, 0.12);
+    }
+
+    .dimension b {
+      display: block;
+      color: var(--walnut);
+      font-family: "Songti SC", "STSong", serif;
+      font-size: 30px;
+      line-height: 1;
+    }
+
+    .dimension span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .check-list {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .check-list li {
+      position: relative;
+      padding: 14px 14px 14px 42px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.32);
+      font-size: 14px;
+    }
+
+    .check-list li::before {
+      position: absolute;
+      left: 15px;
+      top: 14px;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      color: #fffaf1;
+      background: var(--olive);
+      content: "✓";
+      font-size: 12px;
+      line-height: 18px;
+      text-align: center;
+    }
+
+    .footer {
+      margin: 90px 0 40px;
+      padding: 28px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background: rgba(44, 38, 31, 0.72);
+      backdrop-filter: blur(14px);
+    }
+
+    .modal.open {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: min(1180px, 94vw);
+      max-height: 86vh;
+      border-radius: 24px;
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.34);
+    }
+
+    .modal button {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      width: 44px;
+      height: 44px;
+      border: 0;
+      border-radius: 50%;
+      color: var(--walnut);
+      background: var(--paper);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    .reveal {
+      animation: rise 0.7s ease both;
+    }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 900px) {
+      .page {
+        width: min(100% - 24px, 720px);
+      }
+
+      .nav {
+        align-items: flex-start;
+        border-radius: 26px;
+        flex-direction: column;
+      }
+
+      .nav-links {
+        justify-content: flex-start;
+      }
+
+      .hero,
+      .section-head,
+      .style-grid,
+      .room-grid,
+      .shopping-board,
+      .smart-home,
+      .install-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-image {
+        order: -1;
+        min-height: 360px;
+      }
+
+      .stats {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .photo-card,
+      .photo-card:nth-child(1),
+      .photo-card:nth-child(2),
+      .photo-card:nth-child(3),
+      .photo-card:nth-child(4),
+      .photo-card:nth-child(5),
+      .photo-card:nth-child(n+6) {
+        grid-column: span 12;
+        min-height: 280px;
+      }
+
+      .principles {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 560px) {
+      h1 {
+        font-size: 48px;
+      }
+
+      .hero-copy,
+      .palette-card,
+      .install-card,
+      .room-card,
+      .shopping-column {
+        padding: 20px;
+      }
+
+      .palette,
+      .dimension,
+      .device-cluster,
+      .mijia-shots {
+        grid-template-columns: 1fr;
+      }
+
+      .smart-shot img {
+        height: 420px;
+      }
+
+      .item-top {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav page" aria-label="页面导航">
+    <div class="brand"><span class="brand-mark"></span>新房装修手册</div>
+    <div class="nav-links">
+      <a href="#gallery">效果图</a>
+      <a href="#style">风格</a>
+      <a href="#rooms">房间</a>
+      <a href="#materials">物料</a>
+      <a href="#shopping">采购</a>
+      <a href="#smart">米家</a>
+      <a href="#install">安装</a>
+    </div>
+  </nav>
+
+  <main class="page">
+    <header class="hero reveal">
+      <div class="hero-copy">
+        <span class="eyebrow">Warm wood · Light mid-century</span>
+        <h1>轻中古原木风新家计划</h1>
+        <p class="hero-desc">
+          奶油原木现代风为底，加入黑胡桃木、藤编、焦糖棕和橄榄绿点缀。这里集中展示最终效果图、智能家居采购进度与关键安装确认项，方便分享和后续复盘。
+        </p>
+        <div class="hero-actions">
+          <a class="button primary" href="#gallery">先看效果图</a>
+          <a class="button" href="#shopping">查看采购清单</a>
+        </div>
+        <div class="stats" aria-label="装修进度概览">
+          <div class="stat"><b>9</b><span>张最终效果图</span></div>
+          <div class="stat"><b>15</b><span>类已购物料</span></div>
+          <div class="stat"><b>10</b><span>项 618 待购</span></div>
+          <div class="stat"><b>9</b><span>个房间分区</span></div>
+        </div>
+      </div>
+      <div class="hero-image">
+        <img src="最终效果图/微信图片_20250927180800_152_192.jpg" alt="客餐厅最终效果图" />
+      </div>
+    </header>
+
+    <section id="gallery" class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Render Gallery</div>
+          <h2>最终效果图</h2>
+        </div>
+        <p class="section-note">整体是温暖浅木色、奶油墙面、无主灯和局部中古家具的组合。点击图片可以放大查看。</p>
+      </div>
+      <div class="gallery">
+        <figure class="photo-card"><img src="最终效果图/微信图片_20250927180800_152_192.jpg" alt="开放式客餐厅"><figcaption class="photo-label"><span>开放式客餐厅</span><span>浅木 + 奶油白</span></figcaption></figure>
+        <figure class="photo-card"><img src="最终效果图/微信图片_20250927180806_153_192.jpg" alt="客厅与书柜"><figcaption class="photo-label"><span>客厅与书柜</span><span>橄榄绿点缀</span></figcaption></figure>
+        <figure class="photo-card"><img src="最终效果图/微信图片_20250927180823_156_192.jpg" alt="客厅与书房"><figcaption class="photo-label"><span>客厅与书房</span><span>藤编 / 黑胡桃</span></figcaption></figure>
+        <figure class="photo-card"><img src="最终效果图/微信图片_20250927180813_154_192.jpg" alt="双人书房"><figcaption class="photo-label"><span>双人书房</span><span>中古藤编椅</span></figcaption></figure>
+        <figure class="photo-card"><img src="最终效果图/微信图片_20250927180817_155_192.jpg" alt="玄关与客厅"><figcaption class="photo-label"><span>玄关与客厅</span><span>收纳与展示</span></figcaption></figure>
+        <figure class="photo-card"><img src="最终效果图/微信图片_20250927180806_153_192.jpg" alt="主卧"><figcaption class="photo-label"><span>主卧</span><span>暖光床头</span></figcaption></figure>
+        <figure class="photo-card"><img src="最终效果图/5.jpg" alt="儿童房"><figcaption class="photo-label"><span>儿童房</span><span>浅木定制床</span></figcaption></figure>
+        <figure class="photo-card"><img src="最终效果图/微信图片_20250927181432_165_192.jpg" alt="衣柜与梳妆区"><figcaption class="photo-label"><span>衣柜与梳妆区</span><span>平板柜体</span></figcaption></figure>
+        <figure class="photo-card"><img src="最终效果图/微信图片_20250929121716_95_83.jpg" alt="卫生间"><figcaption class="photo-label"><span>卫生间</span><span>米灰极简</span></figcaption></figure>
+      </div>
+    </section>
+
+    <section id="style" class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Style System</div>
+          <h2>风格选品准则</h2>
+        </div>
+        <p class="section-note">后续买家具、灯、家电时，统一按这个基调判断：温暖、干净、柔和，少量中古点缀，不要走冷感科技风。</p>
+      </div>
+      <div class="style-grid">
+        <article class="palette-card">
+          <h3>核心色彩</h3>
+          <p class="section-note">浅木底色 + 米白软装 + 胡桃木/藤编/橄榄绿/焦糖棕点缀。</p>
+          <div class="palette">
+            <div class="swatch" style="background:#f5efe4;color:#4e3326"><span>#F5EFE4</span><b>奶油白</b></div>
+            <div class="swatch" style="background:#d8bea0;color:#4e3326"><span>#D8BEA0</span><b>浅橡木</b></div>
+            <div class="swatch" style="background:#4e3326"><span>#4E3326</span><b>黑胡桃</b></div>
+            <div class="swatch" style="background:#71824d"><span>#71824D</span><b>橄榄绿</b></div>
+          </div>
+        </article>
+        <div class="principles">
+          <article class="principle-card"><h3>主基调</h3><p>浅橡木、奶油白、米灰、浅卡其，整体温暖、干净、柔和。</p></article>
+          <article class="principle-card"><h3>材质</h3><p>浅木、胡桃木、藤编、棉麻、哑光面、低饱和布艺。</p></article>
+          <article class="principle-card"><h3>灯光</h3><p>优先高显色，色温以 2700K-3500K 为主，避免 4000K 以上冷光。</p></article>
+          <article class="principle-card"><h3>避坑</h3><p>避免大面积冷白、亮面黑白灰、银色金属感、过强科技感。</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="rooms" class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Room-by-room Plan</div>
+          <h2>按房间采购与尺寸</h2>
+        </div>
+        <p class="section-note">后续采购按空间推进：每个房间记录已购、待购、尺寸和安装条件。插座/开关按已购记录，灯具先记录待购规格和数量。</p>
+      </div>
+      <div class="room-grid">
+        <article class="room-card">
+          <h3>客厅 <span class="badge">智能中枢</span></h3>
+          <div class="room-tags"><span>已购多</span><span>网络影音待购</span><span>窗帘待定</span></div>
+          <ul>
+            <li>已购：摄像头 ×2、小爱音箱 Pro、中枢网关。</li>
+            <li>已购：客厅投影区灯带，后续可做观影氛围场景。</li>
+            <li>待购：小米 BE10000，万兆 WiFi7，独立三频 Mesh；已有中枢网关，优先标准/非 Pro。</li>
+            <li>待购：普联 TL-SH2210 交换机，放客厅弱电/网关位置。</li>
+            <li>待购：JBL Cinema 715 回音壁，放客厅电视/投影区。</li>
+            <li>待购：智能窗帘，需确认窗帘盒、电源、轨道长度。</li>
+            <li>待考虑：中控屏 Max，先观望二代。</li>
+          </ul>
+          <div class="room-note">客餐厅开关已购：平头熊带字三开×2、小米面板三开×1、四开窗帘开关×1。</div>
+        </article>
+
+        <article class="room-card">
+          <h3>厨房 <span class="badge">岛台重点</span></h3>
+          <div class="room-tags"><span>烤箱待购</span><span>尺寸已量</span><span>明装底盒</span></div>
+          <ul>
+            <li>待购：博世 W6 天鹅白微蒸烤炸一体机 CPK4R15T8W。</li>
+            <li>待购：岛台烤箱 16A 插座配套明装底盒。</li>
+            <li>预留尺寸：宽 600mm × 高 500mm × 深 560mm。</li>
+            <li>安装前提：后方不装背板，16A 插座和明装底盒放旁边抽屉柜。</li>
+            <li>需要烤箱柜与旁边抽屉柜之间开走线孔，插座可检修。</li>
+          </ul>
+          <div class="room-note">厨房开关已购：小米双开×1、手扫控制开关×1、领普顶装人在传感器×1。</div>
+        </article>
+
+        <article class="room-card">
+          <h3>餐厅 <span class="badge">待回填</span></h3>
+          <div class="room-tags"><span>餐厅A立面</span><span>图纸待更新</span></div>
+          <ul>
+            <li>图纸曾标注“蒸烤箱，待更新”，需按博世 W6 最终机型回填。</li>
+            <li>餐厅与岛台相关尺寸要和全屋定制确认一致。</li>
+            <li>餐厅灯光、插座、餐边柜小电器位置后续补充。</li>
+          </ul>
+          <div class="room-note">与厨房岛台联动管理。</div>
+        </article>
+
+        <article class="room-card">
+          <h3>多功能房 <span class="badge">待选</span></h3>
+          <div class="room-tags"><span>家具待定</span><span>网络插座待定</span></div>
+          <ul>
+            <li>待确认：书桌、椅子、收纳柜、显示器/办公设备。</li>
+            <li>待确认：灯光、网络、插座位置。</li>
+            <li>已购：小米双开×1、平头熊四开窗帘开关×1。</li>
+            <li>如有窗帘，纳入智能窗帘统一采购。</li>
+          </ul>
+          <div class="room-note">后续按用途细化办公/客房两种模式。</div>
+        </article>
+
+        <article class="room-card">
+          <h3>老人房 <span class="badge">舒适优先</span></h3>
+          <div class="room-tags"><span>适老化</span><span>窗帘待购</span></div>
+          <ul>
+            <li>待购：智能窗帘，需确认窗帘盒、电源、轨道长度。</li>
+            <li>待选：床、床垫、床头照明、适老化夜灯/传感器。</li>
+            <li>已购：小米双开×1、小米面板三开×1、四开窗帘开关×1。</li>
+            <li>灯光建议暖色、高显色，避免眩光。</li>
+          </ul>
+          <div class="room-note">后续重点看安全、起夜和操作简单。</div>
+        </article>
+
+        <article class="room-card">
+          <h3>儿童房 <span class="badge">希希房间</span></h3>
+          <div class="room-tags"><span>插座已接入</span><span>灯带已接入</span></div>
+          <ul>
+            <li>已购：智能墙壁插座，截图显示已接入米家。</li>
+            <li>已购：希希房间灯带，后续可做睡前/起床场景。</li>
+            <li>已购：平头熊带字三开×1、小米面板三开×1、四开窗帘开关×1。</li>
+            <li>待购：智能窗帘，需确认轨道长度和电源。</li>
+            <li>待选：儿童床、书桌、收纳。</li>
+          </ul>
+          <div class="room-note">后续按学习区和睡眠区拆分。</div>
+        </article>
+
+        <article class="room-card">
+          <h3>主卧 <span class="badge">电动床</span></h3>
+          <div class="room-tags"><span>黑胡桃锚点</span><span>VRF已购</span></div>
+          <ul>
+            <li>待购：菠萝斑马硬糖Max 黑胡桃木色 + 黑绷带手工床垫。</li>
+            <li>待购：箭牌 M60Pro 智能马桶，放主卧套间/主卫使用。</li>
+            <li>已购：主卧/卧室灯带已接入米家。</li>
+            <li>已购：中弘 B19 Mesh 2.0 Pro 一拖五，日立空调接入米家。</li>
+            <li>已购：平头熊带字三开×4、小米面板三开×1、四开窗帘开关×1。</li>
+            <li>待购：智能窗帘，需确认窗帘盒、电源、轨道长度。</li>
+          </ul>
+          <div class="room-note">床头灯、射灯和插座后续补充。</div>
+        </article>
+
+        <article class="room-card">
+          <h3>主卫 <span class="badge">浴霸</span></h3>
+          <div class="room-tags"><span>S2-Air</span><span>人感除臭</span></div>
+          <ul>
+            <li>待购：奥普 S2-Air 智能人感除臭，团购到手约 ¥686。</li>
+            <li>待购：箭牌 M60Pro 智能马桶，需确认坑距 305mm、插座、水压和角阀位置。</li>
+            <li>已购：报警类传感器，具体分配待定。</li>
+            <li>已购：三开玻璃面板×1、小米面板三开×1、领普顶装人在传感器×1（S2-Air 自带人感，可备用）。</li>
+            <li>待确认：镜柜、卫浴、插座、防潮和开孔尺寸。</li>
+          </ul>
+          <div class="room-note">深圳冬天不冷，智能人感比热能环更实用。</div>
+        </article>
+
+        <article class="room-card">
+          <h3>客卫 <span class="badge">浴霸</span></h3>
+          <div class="room-tags"><span>S2-Air</span><span>扫地机上下水</span></div>
+          <ul>
+            <li>待购：如双卫都装，客卫同样按奥普 S2-Air 执行。</li>
+            <li>已购：科沃斯 X12 Pro 扫地机器人上下水版，放客卫洗手盆下面。</li>
+            <li>已购：三开玻璃面板×1、小米面板三开×1、领普顶装人在传感器×1（S2-Air 自带人感，可备用）。</li>
+            <li>待确认：镜柜、卫浴、插座、排风和吊顶开孔尺寸。</li>
+            <li>需要确认洗手盆柜下上下水、电源和检修空间。</li>
+          </ul>
+          <div class="room-note">扫地机基站不放客厅，统一纳入客卫台盆柜下管理。</div>
+        </article>
+      </div>
+    </section>
+
+    <section id="materials" class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Materials Checklist</div>
+          <h2>插座、开关与灯具规格</h2>
+        </div>
+        <p class="section-note">飞书清单中非灯类物料按已购记录；灯具不标记已购，先保留数量和规格，后续再结合整体风格确认色温。</p>
+      </div>
+      <div class="shopping-board">
+        <article class="shopping-column">
+          <h3>插座/电气辅材 <span class="badge">已购</span></h3>
+          <ul class="item-list">
+            <li class="item"><div class="item-top"><div><strong>西门子睿宸灰色插座</strong><small>一开五孔×25 / 五孔×56 / Type-C×10 / 四孔×5</small></div></div><p>全屋插座基础物料，后续按房间点位消化。</p></li>
+            <li class="item"><div class="item-top"><div><strong>网络与弱电</strong><small>西门子 6 类网插×6 / 弱电箱插排×1</small></div></div><p>网络点位和弱电箱供电。</p></li>
+            <li class="item"><div class="item-top"><div><strong>水路辅材</strong><small>全开角阀×3 / 一进二出×2 / 普通角阀×15</small></div></div><p>潜水艇纯铜角阀，客卫扫地机上下水优先确认一进二出点位。</p></li>
+            <li class="item"><div class="item-top"><div><strong>电箱与安装辅材</strong><small>施耐德空开/漏保，水胶布×5，电胶布×10</small></div></div><p>63A 2P×1、32A 1P×1、16A 1P×1、25A 1P+N×3、20A 1P+N×5。</p></li>
+          </ul>
+        </article>
+
+        <article class="shopping-column">
+          <h3>灯具规格 <span class="badge">待购</span></h3>
+          <ul class="item-list">
+            <li class="item"><div class="item-top"><div><strong>嵌入式筒射灯</strong><small>Yeelight 哑光白色灯杯</small></div></div><p>9W 4000K 36° ×45，8W 4000K 36° ×8。</p></li>
+            <li class="item"><div class="item-top"><div><strong>筒射灯/明装射灯</strong><small>Yeelight 哑光白色</small></div></div><p>筒射灯 9W 4000K 36° ×4；明装射灯 9W 4000K 50° ×2。</p></li>
+            <li class="item"><div class="item-top"><div><strong>吸顶灯</strong><small>Yeelight 极简×1 / 可爱型×1</small></div></div><p>30W 三色温，分别用于长辈房和儿童房。</p></li>
+            <li class="item"><div class="item-top"><div><strong>低压灯带</strong><small>Yeelight 3500K，共约 23m</small></div></div><p>设计师明细：客厅 6.4m、客厅阳台 4m、儿童房 2.2m、主卧 2.7m、公卫 1.8m、主卫 1.8m。</p></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="shopping" class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Shopping Board</div>
+          <h2>采购清单</h2>
+        </div>
+        <p class="section-note">已购用于记录交付状态，待购保留型号与链接，方便 618 统一下单和价格对比。</p>
+      </div>
+      <div class="shopping-board">
+        <article class="shopping-column">
+          <h3>已购 <span class="badge">11 项</span></h3>
+          <ul class="item-list">
+            <li class="item"><div class="item-top"><div><strong>摄像头</strong><small>小米 ×3</small></div></div><p>客厅 ×2 + 电梯口 ×1。</p></li>
+            <li class="item"><div class="item-top"><div><strong>智能插线板</strong><small>已购</small></div></div><p>米家生态备用电源控制。</p></li>
+            <li class="item"><div class="item-top"><div><strong>智能灯带</strong><small>部分已购/已接入</small></div></div><p>卧室、主卧、希希房间、阳台、客厅投影等灯带已在米家内；筒灯/射灯另列待购。</p></li>
+            <li class="item"><div class="item-top"><div><strong>中枢网关</strong><small>小米</small></div></div><p>已覆盖网关能力，中控屏 Max 非刚需。</p></li>
+            <li class="item"><div class="item-top"><div><strong>空调 VRF</strong><small>中弘 B19 Mesh 2.0 Pro 一拖五</small></div></div><p>日立中央空调接入米家。</p></li>
+            <li class="item"><div class="item-top"><div><strong>智能门锁</strong><small>小米智能门锁 M40 Pro</small></div></div><p>后续可联动离家/回家模式。</p></li>
+            <li class="item"><div class="item-top"><div><strong>报警类传感器</strong><small>已购</small></div></div><p>安防场景基础设备。</p></li>
+            <li class="item"><div class="item-top"><div><strong>扫地机器人</strong><small>科沃斯 X12 Pro 上下水版</small></div></div><p>已购，放客卫洗手盆下面，需确认上下水、电源和检修空间。</p></li>
+            <li class="item"><div class="item-top"><div><strong>小爱音箱</strong><small>Xiaomi 智能音箱 Pro</small></div></div><p>截图显示已接入路由器设备管理，可作为语音入口。</p></li>
+            <li class="item"><div class="item-top"><div><strong>路由/网络</strong><small>2-1401 / Xiaomi_1401</small></div></div><p>当前网络连接正常，已有 3 台设备连接，支持 Wi-Fi 7 / Mesh。</p></li>
+            <li class="item"><div class="item-top"><div><strong>直流变频落地扇</strong><small>米家设备</small></div></div><p>截图显示已添加，后续可联动温湿度/睡眠场景。</p></li>
+          </ul>
+        </article>
+
+        <article class="shopping-column">
+          <h3>618 待购 <span class="badge">10 项</span></h3>
+          <ul class="item-list">
+            <li class="item"><div class="item-top"><div><strong>电动床</strong><small>菠萝斑马 硬糖Max 黑胡桃木色 + 黑绷带手工床垫</small></div><a href="https://detail.tmall.com/item.htm?id=988754975130" target="_blank" rel="noreferrer">链接</a></div><p>实木黑胡桃色，适合作为卧室中古锚点，原生米家接入。</p></li>
+            <li class="item"><div class="item-top"><div><strong>主路由器</strong><small>小米 BE10000</small></div></div><p>万兆 WiFi7，独立三频 Mesh；已有中枢网关，重点买网络性能，优先标准/非 Pro，不为重复网关能力加钱。</p></li>
+            <li class="item"><div class="item-top"><div><strong>交换机</strong><small>普联 TL-SH2210</small></div></div><p>8 口千兆 + 2 万兆 SFP+ 上联，放客厅弱电/网关位置。</p></li>
+            <li class="item"><div class="item-top"><div><strong>回音壁</strong><small>JBL Cinema 715</small></div></div><p>放客厅电视/投影区，注意预留电源、HDMI/eARC 和走线。</p></li>
+            <li class="item"><div class="item-top"><div><strong>智能马桶</strong><small>箭牌 M60Pro</small></div></div><p>放主卧套间/主卫，截图款坑距 305mm，需确认主卫坑距、水压、电源。</p></li>
+            <li class="item"><div class="item-top"><div><strong>智能窗帘</strong><small>待定</small></div></div><p>需要结合窗帘盒、电源和轨道长度确认。</p></li>
+            <li class="item"><div class="item-top"><div><strong>浴霸</strong><small>奥普 S2-Air 智能人感除臭</small></div><a href="https://u.jd.com/H1NwxNB" target="_blank" rel="noreferrer">链接</a></div><p>团购到手约 ¥686，AI 人感可替代卫生间人在传感器，适合深圳。</p></li>
+            <li class="item"><div class="item-top"><div><strong>电烤箱</strong><small>博世 W6 天鹅白微蒸烤炸一体机 CPK4R15T8W</small></div><a href="https://s.click.taobao.com/5oo5uVl" target="_blank" rel="noreferrer">链接</a></div><p>团购到手约 ¥6090，尺寸 595×555×455mm，支持米家/小爱，适合轻中古原木风。</p></li>
+            <li class="item"><div class="item-top"><div><strong>烤箱明装底盒</strong><small>16A 插座配套</small></div></div><p>岛台烤箱插座侧置时需要，避免底盒或插头影响烤箱插入。</p></li>
+            <li class="item"><div class="item-top"><div><strong>灯具</strong><small>Yeelight 筒射灯/吸顶灯/灯带</small></div></div><p>按物料区规格采购，建议下单前再确认 4000K 是否调整为 3000K-3500K。</p></li>
+          </ul>
+        </article>
+
+        <article class="simple-card" style="padding:22px">
+          <h3>待考虑</h3>
+          <p><strong>小米中控屏 Max：</strong>2025.09 发布，已近一年，观望等二代；中枢网关已有，非刚需。</p>
+        </article>
+
+        <article class="simple-card" style="padding:22px">
+          <h3>未定</h3>
+          <p>预安装的键待确认；灯具规格已记录到物料区，但色温和分房间数量仍需复核。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="smart" class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Mi Home Setup</div>
+          <h2>米家设备进度</h2>
+        </div>
+        <p class="section-note">基于已购买设备截图整理：门锁、路由/网关、灯带、插座、音箱、摄像头等已经形成基础米家体系；科沃斯 X12 Pro 作为客卫上下水扫地机单独记录。</p>
+      </div>
+      <div class="smart-home">
+        <article class="install-card">
+          <h3>已接入/已购买的智能设备</h3>
+          <div class="device-cluster">
+            <div class="device-chip"><b>小米智能门锁 M40 Pro</b><span>客厅 / 门锁入口</span></div>
+            <div class="device-chip"><b>科沃斯 X12 Pro 上下水版</b><span>客卫洗手盆下</span></div>
+            <div class="device-chip"><b>小米摄像机 4K</b><span>客厅/电梯口安防</span></div>
+            <div class="device-chip"><b>Xiaomi 智能音箱 Pro</b><span>语音控制入口</span></div>
+            <div class="device-chip"><b>Xiaomi 中枢网关</b><span>米家本地中枢</span></div>
+            <div class="device-chip"><b>智能灯带</b><span>卧室/主卧/阳台/投影区</span></div>
+            <div class="device-chip"><b>智能墙壁插座</b><span>希希房间</span></div>
+            <div class="device-chip"><b>直流变频落地扇 E</b><span>风扇联动场景</span></div>
+          </div>
+        </article>
+        <div class="mijia-shots">
+          <figure class="smart-shot"><img src="已购买部分设备截图/d9cb412cde641efd6c0a7ddd592b4848.jpg" alt="米家已购买设备截图"></figure>
+          <figure class="smart-shot"><img src="已购买部分设备截图/7cffc73570e7dd09a02c99efcffa2d34.jpg" alt="路由器设备管理截图"></figure>
+        </div>
+      </div>
+    </section>
+
+    <section id="install" class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Installation Notes</div>
+          <h2>岛台烤箱安装确认</h2>
+        </div>
+        <p class="section-note">烤箱位深度比较临界，核心前提是后方不装背板、16A 插座和明装底盒放侧边抽屉柜，避免插头顶住机器。</p>
+      </div>
+      <div class="install-grid">
+        <article class="install-card">
+          <h3>预留尺寸</h3>
+          <div class="dimension">
+            <div><b>600</b><span>宽 mm</span></div>
+            <div><b>500</b><span>高 mm</span></div>
+            <div><b>560</b><span>深 mm</span></div>
+          </div>
+        </article>
+        <article class="install-card">
+          <h3>执行要求</h3>
+          <ul class="check-list">
+            <li>选定型号：博世 W6 天鹅白微蒸烤炸一体机 CPK4R15T8W，机身 595×555×455mm。</li>
+            <li>烤箱位后方不装背板，或做大开孔；深度 560mm 才可安全释放。</li>
+            <li>16A 插座和明装底盒放旁边抽屉柜，不放机器正后方。</li>
+            <li>烤箱柜与旁边抽屉柜之间开走线孔，插座需可触达，方便断电维护。</li>
+            <li>上下保留通风/收口空间，避免完全封死。</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer page">
+    <p>新房装修展示页 · 轻中古原木风 · 本页面基于本地装修资料整理，可直接分享文件夹或导出为 PDF。</p>
+  </footer>
+
+  <div class="modal" id="imageModal" aria-hidden="true" role="dialog" aria-label="图片预览">
+    <button type="button" aria-label="关闭图片预览">×</button>
+    <img alt="放大的效果图" />
+  </div>
+
+  <script>
+    const modal = document.getElementById("imageModal");
+    const modalImage = modal.querySelector("img");
+    const closeButton = modal.querySelector("button");
+
+    document.querySelectorAll(".photo-card img, .smart-shot img").forEach((image) => {
+      image.addEventListener("click", () => {
+        modalImage.src = image.src;
+        modalImage.alt = image.alt;
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+      });
+    });
+
+    function closeModal() {
+      modal.classList.remove("open");
+      modal.setAttribute("aria-hidden", "true");
+      modalImage.removeAttribute("src");
+    }
+
+    closeButton.addEventListener("click", closeModal);
+    modal.addEventListener("click", (event) => {
+      if (event.target === modal) closeModal();
+    });
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && modal.classList.contains("open")) closeModal();
+    });
+  </script>
+</body>
+</html>
