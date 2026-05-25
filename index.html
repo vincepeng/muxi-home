@@ -4,6 +4,22 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>新房装修展示 | 轻中古原木风</title>
+  <meta name="description" content="轻中古原木风新家装修展示页，集中整理最终效果图、房间采购清单、智能家居进度、灯具规格与关键安装尺寸，方便分享和后续复盘。" />
+  <meta name="theme-color" content="#f5efe4" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <link rel="canonical" href="https://vincepeng.github.io/muxi-home/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="新房装修手册" />
+  <meta property="og:title" content="轻中古原木风新家计划" />
+  <meta property="og:description" content="集中展示最终效果图、按房间采购计划、米家设备进度与关键安装确认项，方便装修分享和后续复盘。" />
+  <meta property="og:url" content="https://vincepeng.github.io/muxi-home/" />
+  <meta property="og:image" content="https://vincepeng.github.io/muxi-home/%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%9B%BE/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250927180800_152_192.jpg" />
+  <meta property="og:image:alt" content="轻中古原木风新家客餐厅效果图" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="轻中古原木风新家计划" />
+  <meta name="twitter:description" content="最终效果图、装修采购清单、智能家居进度与安装尺寸集中整理。" />
+  <meta name="twitter:image" content="https://vincepeng.github.io/muxi-home/%E6%9C%80%E7%BB%88%E6%95%88%E6%9E%9C%E5%9B%BE/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250927180800_152_192.jpg" />
   <style>
     :root {
       --cream: #f5efe4;
@@ -29,6 +45,7 @@
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: 110px;
     }
 
     body {
@@ -208,6 +225,23 @@
       flex-wrap: wrap;
       gap: 12px;
       margin-top: 34px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .hero-pills span {
+      padding: 8px 12px;
+      border: 1px solid rgba(78, 51, 38, 0.1);
+      border-radius: 999px;
+      color: var(--coffee);
+      background: rgba(255, 255, 255, 0.45);
+      font-size: 13px;
+      font-weight: 600;
     }
 
     .button {
@@ -765,6 +799,39 @@
       font-size: 13px;
     }
 
+    .mobile-dock {
+      position: fixed;
+      left: 50%;
+      bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+      z-index: 40;
+      display: none;
+      width: min(calc(100% - 24px), 720px);
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.56);
+      border-radius: 24px;
+      background: rgba(255, 250, 241, 0.92);
+      box-shadow: 0 16px 50px rgba(78, 51, 38, 0.16);
+      backdrop-filter: blur(18px);
+      transform: translateX(-50%);
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .mobile-dock a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 0 8px;
+      border-radius: 16px;
+      color: var(--walnut);
+      background: rgba(182, 129, 82, 0.08);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+      text-align: center;
+    }
+
     .modal {
       position: fixed;
       inset: 0;
@@ -823,13 +890,29 @@
       }
 
       .nav {
-        align-items: flex-start;
+        top: 10px;
         border-radius: 26px;
+        padding: 12px;
         flex-direction: column;
+        align-items: stretch;
       }
 
       .nav-links {
+        width: 100%;
+        flex-wrap: nowrap;
         justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: none;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-links a {
+        flex: 0 0 auto;
+        white-space: nowrap;
       }
 
       .hero,
@@ -845,6 +928,10 @@
       .hero-image {
         order: -1;
         min-height: 360px;
+      }
+
+      .hero-copy::after {
+        display: none;
       }
 
       .stats {
@@ -865,11 +952,24 @@
       .principles {
         grid-template-columns: 1fr;
       }
+
+      .mobile-dock {
+        display: grid;
+      }
+
+      .footer {
+        margin-bottom: 110px;
+      }
     }
 
     @media (max-width: 560px) {
+      html {
+        scroll-padding-top: 90px;
+      }
+
       h1 {
-        font-size: 48px;
+        font-size: 42px;
+        line-height: 0.98;
       }
 
       .hero-copy,
@@ -887,12 +987,47 @@
         grid-template-columns: 1fr;
       }
 
+      .hero {
+        min-height: auto;
+        border-radius: 32px;
+      }
+
+      .hero-image {
+        min-height: 280px;
+      }
+
+      .hero-desc {
+        margin-top: 18px;
+        font-size: 15px;
+      }
+
+      .hero-actions {
+        gap: 10px;
+        margin-top: 24px;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-pills {
+        gap: 8px;
+      }
+
+      .hero-pills span {
+        font-size: 12px;
+      }
+
       .smart-shot img {
-        height: 420px;
+        height: 360px;
       }
 
       .item-top {
         flex-direction: column;
+      }
+
+      .mobile-dock {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
   </style>
@@ -919,6 +1054,11 @@
         <p class="hero-desc">
           奶油原木现代风为底，加入黑胡桃木、藤编、焦糖棕和橄榄绿点缀。这里集中展示最终效果图、智能家居采购进度与关键安装确认项，方便分享和后续复盘。
         </p>
+        <div class="hero-pills" aria-label="页面亮点">
+          <span>按房间整理</span>
+          <span>待购可追踪</span>
+          <span>安装尺寸已记录</span>
+        </div>
         <div class="hero-actions">
           <a class="button primary" href="#gallery">先看效果图</a>
           <a class="button" href="#shopping">查看采购清单</a>
@@ -1259,6 +1399,13 @@
   <footer class="footer page">
     <p>新房装修展示页 · 轻中古原木风 · 本页面基于本地装修资料整理，可直接分享文件夹或导出为 PDF。</p>
   </footer>
+
+  <nav class="mobile-dock" aria-label="手机快捷导航">
+    <a href="#gallery">效果图</a>
+    <a href="#rooms">房间</a>
+    <a href="#shopping">采购</a>
+    <a href="#install">安装</a>
+  </nav>
 
   <div class="modal" id="imageModal" aria-hidden="true" role="dialog" aria-label="图片预览">
     <button type="button" aria-label="关闭图片预览">×</button>
