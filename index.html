@@ -386,9 +386,15 @@
 
     .progress-grid {
       display: grid;
-      grid-template-columns: 0.9fr 1.1fr;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto 1fr;
       gap: 20px;
+      align-items: start;
     }
+
+    .progress-card { grid-column: 1; grid-row: 1; }
+    .progress-todo { grid-column: 1; grid-row: 2; }
+    .progress-timeline { grid-column: 2; grid-row: 1 / span 2; }
 
     .progress-card,
     .progress-timeline {
@@ -404,11 +410,106 @@
       padding: 24px;
     }
 
+    /* 时间线折叠：已完成超过一周自动归档 */
+    .progress-archive {
+      margin-top: 12px;
+      border-top: 1px dashed rgba(118, 84, 56, 0.25);
+      padding-top: 12px;
+    }
+    .progress-archive[hidden] { display: none; }
+    .progress-archive > summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: rgba(118, 84, 56, 0.08);
+      color: var(--walnut);
+      font-size: 13px;
+      font-weight: 600;
+      user-select: none;
+      transition: background 0.15s;
+    }
+    .progress-archive > summary:hover { background: rgba(118, 84, 56, 0.14); }
+    .progress-archive > summary::-webkit-details-marker { display: none; }
+    .progress-archive > summary::before {
+      content: "▶ ";
+      display: inline-block;
+      transition: transform 0.2s;
+      font-size: 10px;
+    }
+    .progress-archive[open] > summary::before { transform: rotate(90deg); }
+    .progress-archive .progress-list { margin-top: 8px; }
+
     .progress-card p {
       margin: 12px 0 0;
       color: var(--muted);
       font-size: 14px;
     }
+
+    .progress-todo {
+      border: 1px solid rgba(118, 84, 56, 0.25);
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, rgba(255, 250, 241, 0.85), rgba(245, 235, 220, 0.72));
+      box-shadow: 0 12px 36px rgba(78, 51, 38, 0.08);
+      backdrop-filter: blur(8px);
+      padding: 24px;
+    }
+    .progress-todo h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 16px;
+      font-size: 17px;
+      color: var(--walnut);
+    }
+    .progress-todo h3::before {
+      content: "⚡";
+      font-size: 18px;
+    }
+    .todo-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .todo-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.55);
+      font-size: 14px;
+      line-height: 1.55;
+      transition: transform 0.15s ease;
+    }
+    .todo-list li:hover { transform: translateX(4px); }
+    .todo-list li.todo-group {
+      padding: 4px 2px 0;
+      background: transparent;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+    .todo-list li.todo-group:hover { transform: none; }
+    .todo-list li .num {
+      flex-shrink: 0;
+      width: 22px; height: 22px;
+      border-radius: 50%;
+      background: var(--walnut);
+      color: #fffaf1;
+      font-size: 12px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      margin-top: 1px;
+    }
+    .todo-list li b { color: var(--walnut); }
 
     .progress-meta {
       display: flex;
@@ -433,6 +534,42 @@
       display: grid;
       gap: 12px;
       margin-top: 4px;
+    }
+
+    .progress-group {
+      padding-top: 14px;
+      border-top: 1px solid var(--line);
+    }
+
+    .progress-group:first-child {
+      padding-top: 0;
+      border-top: 0;
+    }
+
+    .progress-group-head {
+      margin-bottom: 10px;
+    }
+
+    .progress-group .progress-list {
+      margin-top: 0;
+      gap: 0;
+    }
+
+    .progress-group .progress-item {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 12px 0 0;
+      border-top: 0;
+    }
+
+    .progress-group .progress-item:first-child {
+      padding-top: 0;
+    }
+
+    .progress-group .progress-item + .progress-item {
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
     }
 
     .progress-item {
@@ -1337,6 +1474,35 @@
       margin-top: 18px;
     }
 
+    .track-group-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 18px;
+      padding: 8px 14px;
+      background: linear-gradient(90deg, rgba(118, 84, 56, 0.12), rgba(255, 255, 255, 0));
+      border-left: 3px solid var(--walnut);
+      border-radius: 8px;
+      color: var(--walnut);
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.04em;
+    }
+
+    .track-group-head:first-child {
+      margin-top: 0;
+    }
+
+    .track-group-head .badge {
+      font-size: 11px;
+      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(118, 84, 56, 0.14);
+      color: var(--walnut);
+      letter-spacing: 0;
+    }
+
     .track-row {
       display: grid;
       grid-template-columns: 1.1fr 1.2fr 1fr;
@@ -1470,6 +1636,13 @@
         grid-template-columns: 1fr;
       }
 
+      .progress-card,
+      .progress-todo,
+      .progress-timeline {
+        grid-column: auto !important;
+        grid-row: auto !important;
+      }
+
       .network-card {
         min-height: auto;
       }
@@ -1584,11 +1757,11 @@
       <a href="#progress">进度</a>
       <a href="#gallery">效果图</a>
       <a href="#style">风格</a>
-      <a href="#rooms">房间</a>
       <a href="#shopping">采购</a>
       <a href="#network">网络</a>
       <a href="#lighting">灯光</a>
       <a href="#smart">米家</a>
+      <a href="#switches">开关</a>
       <a href="#install">安装</a>
     </div>
   </nav>
@@ -1607,9 +1780,8 @@
         </div>
         <div class="stats" aria-label="装修进度概览">
           <div class="stat"><b>9</b><span>张最终效果图</span></div>
-          <div class="stat"><b>15</b><span>项已购清单</span></div>
-          <div class="stat"><b>7</b><span>项 618 待购</span></div>
-          <div class="stat"><b>9</b><span>个房间分区</span></div>
+          <div class="stat"><b>26</b><span>项已购清单</span></div>
+          <div class="stat"><b>4</b><span>项 618 待购</span></div>
         </div>
       </div>
       <div class="hero-image">
@@ -1628,77 +1800,217 @@
       <div class="progress-grid">
         <article class="progress-card">
           <h3>当前状态</h3>
-          <p>目前进入面层和关键安装衔接阶段，现场重点是先把墙面收口和硬装面材稳定下来，再顺着灯光、窗帘、卫浴和软装节点往前推进，逐步进入可交付状态。</p>
+          <p>油漆、灯光安装、电的安装、美缝、燃气安装、下水道疏通、卫浴镜灯、洗地机安装、大家电安装和美容修复都已处理到位，床和餐桌也已经进场。当前进入软装进场阶段，剩余事项以局部收口、全屋定制修复和设备细节调整为主。</p>
           <div class="progress-meta">
-            <span>当前施工：刷面漆</span>
-            <span>并行安装：岩板</span>
-            <span>下一节点：周六装灯</span>
+            <span>✅ 油漆已完成</span>
+            <span>✅ 灯光已安装完成</span>
+            <span>✅ 大家电安装已完成</span>
+            <span>✅ 燃气、下水、洗地机和卫生间镜灯已完成</span>
+            <span>✅ 床和餐桌已进场</span>
+            <span>🪴 等待软装进场</span>
           </div>
+        </article>
+        <article class="progress-todo">
+          <h3>待办优先级</h3>
+          <ul class="todo-list">
+            <li class="todo-group">全屋定制</li>
+            <li><span class="num">1</span> <b>全屋定制修复·餐边柜上方隔板松动</b> — 检查餐边柜上方隔板的固定方式，补强连接件或重新加固。</li>
+            <li><span class="num">2</span> <b>全屋定制修复·玄关鞋柜竖向对齐</b> — 玄关鞋柜没有竖向对齐，存在较大缝隙，绳雪反馈需要修复。</li>
+            <li><span class="num">3</span> <b>全屋定制修复·灶下柜开孔</b> — 给灶下面的柜子做开孔，先确认燃气管走位、煤气表位置和后续清洁/检修可达性。</li>
+            <li><span class="num">4</span> <b>全屋定制修复·燃气柜旁多打孔</b> — 修复燃气柜旁边多打的孔，确认补板、封边和收口效果。</li>
+            <li><span class="num">5</span> <b>处理冰箱后面的空隙</b> — 冰箱已经安装完成，后面预留的空隙需要继续处理，避免后续落灰或影响整体收口。</li>
+            <li class="todo-group">打胶与收口</li>
+            <li><span class="num">6</span> <b>岛台缝隙收口</b> — 处理岛台缝隙问题，复核拼接位、收口和台面下方支撑，确保外观和稳固性都到位。</li>
+            <li><span class="num">7</span> <b>踢脚线角落打胶</b> — 检查踢脚线角落缝隙，统一补胶收口，避免积灰和视觉断点。</li>
+            <li><span class="num">8</span> <b>餐边柜打胶</b> — 餐边柜与墙面、台面及相邻柜体交接处补胶，保证收口完整。</li>
+            <li class="todo-group">卫浴</li>
+            <li><span class="num">9</span> <b>客卫开关龙头松动</b> — 检查客卫开关龙头固定点，重新锁紧或更换连接件。</li>
+            <li><span class="num">10</span> <b>壁龛安装</b> — 确认壁龛位置、尺寸和收口方式，安装后复核排水、防水和美观度。</li>
+            <li><span class="num">11</span> <b>转角插头安装</b> — 安装卫浴区域转角插头，确认防水、安全距离和日常使用便利性。</li>
+            <li><span class="num">12</span> <b>复尺厕所·甜甜圈安装条件</b> — 复尺厕所的空间和进出门动线，确认是否满足甜甜圈洗衣机/烘干机的摆放和安装条件。</li>
+            <li><span class="num">13</span> <b>确认浴室柜灯电压</b> — 确定浴室柜灯的供电电压和控制方式，方便购买匹配的智能开关。</li>
+            <li class="todo-group">设备与电气</li>
+            <li><span class="num">14</span> <b>处理客厅投影仪走线</b> — 投影的线需要隐藏处理（考虑使用人在传感器或其它方式优化走线）。</li>
+            <li class="todo-group">其他待确认</li>
+            <li><span class="num">15</span> <b>纱窗安装</b> — 预计安装时间：6 月 22 日。</li>
+            <li><span class="num">16</span> <b>安装护墙条</b> — 在墙面容易磕碰的位置补装护墙条，和护角条一起统一确认材质、颜色和安装位置。</li>
+            <li><span class="num">17</span> <b>联系退回多余设备</b> — 联系龚姐退掉多余的插座底盒以及买多的灯具。</li>
+          </ul>
         </article>
         <article class="progress-timeline">
           <h3>近期节点</h3>
-          <div class="progress-list">
-            <div class="progress-item">
-              <div class="progress-label">周二到周四</div>
-              <div class="progress-body">
-                <b>刷面漆</b>
-                <span>以墙顶面成品效果、颜色统一和收口质量为主，决定后续整体空间观感。</span>
+          <div class="progress-list" data-progress-active>
+            <div class="progress-group">
+              <div class="progress-group-head">
+                <div class="progress-label">下一节点</div>
+              </div>
+              <div class="progress-list">
+                <div class="progress-item">
+                  <div class="progress-body">
+                    <b>软装进场</b>
+                    <span>床和餐桌已经进场，后续重点转向植物、挂画、配饰、床品等软装布置。</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="progress-item">
-              <div class="progress-label">本周并行</div>
-              <div class="progress-body">
-                <b>安装岩板</b>
-                <span>同步推进硬装主材落位，和墙面、柜体、现场保护一起看整体完成度。</span>
+            <div class="progress-group">
+              <div class="progress-group-head">
+                <div class="progress-label">待联调</div>
+              </div>
+              <div class="progress-list">
+                <div class="progress-item">
+                  <div class="progress-body">
+                    <b>局部收口与细节调整</b>
+                    <span>按待办清单继续处理全屋定制、卫浴、电气和其他待确认事项。</span>
+                  </div>
+                </div>
               </div>
             </div>
-            <div class="progress-item">
-              <div class="progress-label">本周六</div>
-              <div class="progress-body">
-                <b>安装灯光</b>
-                <span>1735 方案落地后，重点确认筒灯、射灯的色温联动、回路分组和夜间氛围。</span>
+          </div>
+          <div class="progress-list" data-progress-completed>
+            <div class="progress-group">
+              <div class="progress-group-head">
+                <div class="progress-label">✅ 已完成</div>
               </div>
-            </div>
-            <div class="progress-item">
-              <div class="progress-label">时间待定</div>
-              <div class="progress-body">
-                <b>安装窗帘</b>
-                <span>等现场条件合适后推进，重点看轨道、电机、窗帘盒和最终开合顺畅度。</span>
-              </div>
-            </div>
-            <div class="progress-item">
-              <div class="progress-label">6 月初</div>
-              <div class="progress-body">
-                <b>安装卫浴</b>
-                <span>集中处理卫浴洁具、配件和细部收口，和插座、开孔、防潮一起复核。</span>
-              </div>
-            </div>
-            <div class="progress-item">
-              <div class="progress-label">6 月初</div>
-              <div class="progress-body">
-                <b>安装一户一景</b>
-                <span>把入户第一眼的完成度先做起来，方便整体风格和交付观感尽快成型。</span>
-              </div>
-            </div>
-            <div class="progress-item">
-              <div class="progress-label">6 月中旬</div>
-              <div class="progress-body">
-                <b>安装厨房家电</b>
-                <span>厨房油烟机、灶、冰箱和净水器安排在 6 月中旬，安装时一起复核尺寸、上下水、电源和通风条件。</span>
-              </div>
-            </div>
-            <div class="progress-item">
-              <div class="progress-label">6 月中旬</div>
-              <div class="progress-body">
-                <b>厨卫打胶</b>
-                <span>橱柜台面、卫浴洁具、淋浴房、岩板拼缝等收口打胶；安排在所有洁具/家电/台面就位后、开荒前进行，避免二次拆装破坏胶层。</span>
-              </div>
-            </div>
-            <div class="progress-item">
-              <div class="progress-label">6 月中旬</div>
-              <div class="progress-body">
-                <b>开荒</b>
-                <span>在主要安装节点完成后进行深度清洁，为后续验收、补缺和家具进场创造条件。</span>
+              <div class="progress-list">
+                <div class="progress-item" data-completed-date="2026-05-28">
+                  <div class="progress-body">
+                    <b>油漆</b>
+                    <span>墙面施工已完成，当前进入安装和细部联调阶段。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-05">
+                  <div class="progress-body">
+                    <b>电的安装</b>
+                    <span>开关、插座和现场回路安装已完成，后续转入局部联调和配合安装阶段。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-05">
+                  <div class="progress-body">
+                    <b>安装灯光</b>
+                    <span>灯光安装已完成，后续重点转到智能控制和场景联动。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-05">
+                  <div class="progress-body">
+                    <b>确定吊顶人在传感器安装位置</b>
+                    <span>吊顶传感器位置已经确认，为后续预埋和联动留出条件。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-05">
+                  <div class="progress-body">
+                    <b>全屋定制框架开孔决策</b>
+                    <span>框架阶段开孔决策已完成，后续只保留餐边柜等局部细化开孔问题。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-05">
+                  <div class="progress-body">
+                    <b>全屋定制整改</b>
+                    <span>已发现的问题已完成处理，柜体平整度和相关整改项不再单独占用近期节点。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-15">
+                  <div class="progress-body">
+                    <b>美缝</b>
+                    <span>主卫与客卫美缝均已完成，卫浴后续安装不再受美缝工序影响。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-15">
+                  <div class="progress-body">
+                    <b>锁定入场安装条件</b>
+                    <span>卫浴入场所需的现场尺寸、开孔、电源、五金、上下水和到货状态均已确认。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-15">
+                  <div class="progress-body">
+                    <b>处理电工遗留问题</b>
+                    <span>窗帘掉线和防水开关损坏等遗留问题已处理完毕，相关线路与点位已复测。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-15">
+                  <div class="progress-body">
+                    <b>处理全屋智能问题</b>
+                    <span>蓝牙网关补装、奶奶房灯光接入、摄像头存储卡补齐，以及弱电箱设备与线缆整理均已完成。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-15">
+                  <div class="progress-body">
+                    <b>开荒保洁</b>
+                    <span>大面积清理已完成，为后续家具和软装进场提供条件。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-15">
+                  <div class="progress-body">
+                    <b>卫浴安装</b>
+                    <span>卫浴洁具、配件和细部收口已处理完毕。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-06-15">
+                  <div class="progress-body">
+                    <b>设备与洁具安装</b>
+                    <span>包括浴霸、扫地机器人、花洒、马桶等设备均已安装完成。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-07-06">
+                  <div class="progress-body">
+                    <b>燃气与下水收尾</b>
+                    <span>燃气安装与下水道疏通均已完成，厨房和公卫基础使用条件进一步闭环。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-07-06">
+                  <div class="progress-body">
+                    <b>餐边柜与洗地机收尾</b>
+                    <span>餐边柜拆除、洗地机安装以及洗地机上方盖板修复均已完成。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-07-06">
+                  <div class="progress-body">
+                    <b>卫生间镜灯收尾</b>
+                    <span>浴室镜子和卫生间明装灯均已处理完成，卫生间视觉和基础照明进一步完善。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-07-06">
+                  <div class="progress-body">
+                    <b>大家电安装</b>
+                    <span>冰箱、洗衣机、灶、烟机、洗碗机等大家电安装阶段已完成。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-07-06">
+                  <div class="progress-body">
+                    <b>美容修复</b>
+                    <span>定制柜和瓷砖相关美容修复已完成，现场进入软装前收尾阶段。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-07-06">
+                  <div class="progress-body">
+                    <b>床和餐桌进场</b>
+                    <span>床和餐桌均已进场，主要家具开始落位。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-07-06">
+                  <div class="progress-body">
+                    <b>油烟机开板与台面贴膜</b>
+                    <span>油烟机开板和台面保护膜均已处理完成，厨房区域收口继续推进。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-07-06">
+                  <div class="progress-body">
+                    <b>卫浴柜子补充</b>
+                    <span>卫浴柜子与相关五金配件已补充完成。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-07-06">
+                  <div class="progress-body">
+                    <b>设备与电气收尾</b>
+                    <span>电烤箱电线优化、烤箱安装位复尺、插线板修改、十线补充和燃气感应外观调整均已完成。</span>
+                  </div>
+                </div>
+                <div class="progress-item" data-completed-date="2026-07-06">
+                  <div class="progress-body">
+                    <b>防水罩更换</b>
+                    <span>需要处理的防水罩已完成更换，后续使用和收口更稳妥。</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1755,250 +2067,6 @@
       </div>
     </section>
 
-    <section id="rooms" class="reveal">
-      <div class="section-head">
-        <div>
-          <div class="kicker">Room-by-room Plan</div>
-          <h2>按房间采购与尺寸</h2>
-        </div>
-        <p class="section-note">按空间整理的采购、尺寸与安装要点。</p>
-      </div>
-      <div class="room-switch" role="tablist" aria-label="房间切换">
-        <button class="room-tab active" type="button" role="tab" aria-selected="true" data-room-tab="living">客厅</button>
-        <button class="room-tab" type="button" role="tab" aria-selected="false" data-room-tab="kitchen">厨房</button>
-        <button class="room-tab" type="button" role="tab" aria-selected="false" data-room-tab="dining">餐厅</button>
-        <button class="room-tab" type="button" role="tab" aria-selected="false" data-room-tab="multi">多功能房</button>
-        <button class="room-tab" type="button" role="tab" aria-selected="false" data-room-tab="elder">老人房</button>
-        <button class="room-tab" type="button" role="tab" aria-selected="false" data-room-tab="kid">儿童房</button>
-        <button class="room-tab" type="button" role="tab" aria-selected="false" data-room-tab="master">主卧</button>
-        <button class="room-tab" type="button" role="tab" aria-selected="false" data-room-tab="master-bath">主卫</button>
-        <button class="room-tab" type="button" role="tab" aria-selected="false" data-room-tab="guest-bath">客卫</button>
-      </div>
-      <div class="room-grid">
-        <article class="room-card active" data-room-panel="living">
-          <h3>客厅 <span class="badge">智能中枢</span></h3>
-          <div class="room-tags"><span>已购多</span><span>网络已购</span><span>窗帘已购</span></div>
-          <div class="room-sections">
-            <section class="room-group">
-              <h4>已购</h4>
-              <ul>
-                <li>摄像机 ×3：客厅/室内 2 台，门外过道 1 台；小爱音箱 Pro、中枢网关。</li>
-                <li>小米 BE7200 Pro 主路由器，放客厅中央空调检修口，负责全屋主 Wi‑Fi 和 2.5G 核心接入。</li>
-                <li>TP-LINK TL-SG2016D 16 口千兆云管理交换机，放弱电箱，承接 11 路墙插网线。</li>
-                <li>客厅投影区灯带，后续可做观影氛围场景。</li>
-                <li>科创者 mini5 电机+轨道，全屋合计 ¥6500（12 套）；客厅按布帘双开 2 个电机 + 纱帘 1 个电机执行，轨道为 L 型 3130mm + 1335mm。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>待购</h4>
-              <ul>
-                <li>JBL Cinema 715 回音壁，放客厅电视/投影区。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>待考虑</h4>
-              <ul>
-                <li>中控屏 Max，先观望二代。</li>
-              </ul>
-            </section>
-          </div>
-          <div class="room-note">客餐厅开关已购：平头熊带字三开×2、小米面板三开×1、四开窗帘开关×1。</div>
-        </article>
-
-        <article class="room-card" data-room-panel="kitchen">
-          <h3>厨房 <span class="badge">岛台重点</span></h3>
-          <div class="room-tags"><span>烤箱待购</span><span>尺寸已量</span><span>明装底盒</span></div>
-          <div class="room-sections">
-            <section class="room-group">
-              <h4>待购</h4>
-              <ul>
-                <li>博世 W6 天鹅白微蒸烤炸一体机 CPK4R15T8W。</li>
-                <li>岛台烤箱 16A 插座配套明装底盒。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>尺寸与安装</h4>
-              <ul>
-                <li>预留尺寸：宽 600mm × 高 500mm × 深 560mm。</li>
-                <li>安装前提：后方不装背板，16A 插座和明装底盒放旁边抽屉柜。</li>
-                <li>需要烤箱柜与旁边抽屉柜之间开走线孔，插座可检修。</li>
-              </ul>
-            </section>
-          </div>
-          <div class="room-note">厨房开关已购：小米双开×1、手扫控制开关×1、领普顶装人在传感器×1。</div>
-        </article>
-
-        <article class="room-card" data-room-panel="dining">
-          <h3>餐厅 <span class="badge">待回填</span></h3>
-          <div class="room-tags"><span>餐厅A立面</span><span>图纸待更新</span></div>
-          <div class="room-sections">
-            <section class="room-group">
-              <h4>尺寸</h4>
-              <ul>
-                <li>图纸曾标注“蒸烤箱，待更新”，需按博世 W6 最终机型回填。</li>
-                <li>餐厅与岛台相关尺寸要和全屋定制确认一致。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>未定</h4>
-              <ul>
-                <li>餐厅灯光、插座、餐边柜小电器位置后续补充。</li>
-              </ul>
-            </section>
-          </div>
-          <div class="room-note">与厨房岛台联动管理。</div>
-        </article>
-
-        <article class="room-card" data-room-panel="multi">
-          <h3>多功能房 <span class="badge">待选</span></h3>
-          <div class="room-tags"><span>家具待定</span><span>网络插座待定</span></div>
-          <div class="room-sections">
-            <section class="room-group">
-              <h4>已购</h4>
-              <ul>
-                <li>小米双开×1、平头熊四开窗帘开关×1。</li>
-                <li>科创者 mini5 电机+轨道；双层每层单电机，即布帘 1 个电机 + 纱帘 1 个电机；按截图记录轨道约 1.85m，窗帘盒宽度 18cm。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>未定</h4>
-              <ul>
-                <li>书桌、椅子、收纳柜、显示器/办公设备。</li>
-                <li>灯光、网络、插座位置。</li>
-              </ul>
-            </section>
-          </div>
-          <div class="room-note">后续按用途细化办公/客房两种模式。</div>
-        </article>
-
-        <article class="room-card" data-room-panel="elder">
-          <h3>老人房 <span class="badge">舒适优先</span></h3>
-          <div class="room-tags"><span>适老化</span><span>窗帘已购</span></div>
-          <div class="room-sections">
-            <section class="room-group">
-              <h4>已购</h4>
-              <ul>
-                <li>科创者 mini5 电机+轨道；双层每层单电机，即布帘 1 个电机 + 纱帘 1 个电机，按截图记录轨道约 2.4m。</li>
-                <li>小米双开×1、小米面板三开×1、四开窗帘开关×1。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>待购与建议</h4>
-              <ul>
-                <li>床、床垫、床头照明、适老化夜灯/传感器。</li>
-                <li>灯光建议暖色、高显色，避免眩光。</li>
-              </ul>
-            </section>
-          </div>
-          <div class="room-note">窗帘盒宽度 18cm；后续重点看安全、起夜和操作简单。</div>
-        </article>
-
-        <article class="room-card" data-room-panel="kid">
-          <h3>儿童房 <span class="badge">希希房间</span></h3>
-          <div class="room-tags"><span>插座已接入</span><span>灯带已接入</span></div>
-          <div class="room-sections">
-            <section class="room-group">
-              <h4>已购</h4>
-              <ul>
-                <li>智能墙壁插座，截图显示已接入米家。</li>
-                <li>希希房间灯带，后续可做睡前/起床场景。</li>
-                <li>平头熊带字三开×1、小米面板三开×1、四开窗帘开关×1。</li>
-                <li>科创者 mini5 电机+轨道；双层每层单电机，即布帘 1 个电机 + 纱帘 1 个电机，按截图记录轨道约 2.13m。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>待购</h4>
-              <ul>
-                <li>儿童床、书桌、收纳。</li>
-              </ul>
-            </section>
-          </div>
-          <div class="room-note">窗帘盒宽度 19cm；后续按学习区和睡眠区拆分。</div>
-        </article>
-
-        <article class="room-card" data-room-panel="master">
-          <h3>主卧 <span class="badge">电动床</span></h3>
-          <div class="room-tags"><span>黑胡桃锚点</span><span>VRF已购</span></div>
-          <div class="room-sections">
-            <section class="room-group">
-              <h4>已购</h4>
-              <ul>
-                <li>主卧/卧室灯带已接入米家。</li>
-                <li>中弘 B19 Mesh 2.0 Pro 一拖五，日立空调接入米家。</li>
-                <li>平头熊带字三开×4、小米面板三开×1、四开窗帘开关×1。</li>
-                <li>科创者 mini5 电机+轨道，全屋合计 ¥6500（12 套）；主卧按布帘双开 2 个电机 + 纱帘 1 个电机执行，主轨约 3110mm，另标注 890mm 侧边/回边尺寸。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>待购</h4>
-              <ul>
-                <li>菠萝斑马硬糖Max 黑胡桃木色 + 黑绷带手工床垫；备选 MySide SOLO 量化睡感+电动床架（邻居推荐，团购 1.5m ¥12,999）。</li>
-                <li>箭牌 M60Pro 智能马桶，放主卧套间/主卫使用。</li>
-              </ul>
-            </section>
-          </div>
-          <div class="room-note">主卧检修口预留一台小米 Mesh 从路由，优先走有线回程补卧室侧信号；床头灯、射灯和插座后续补充。</div>
-        </article>
-
-        <article class="room-card" data-room-panel="master-bath">
-          <h3>主卫 <span class="badge">浴霸</span></h3>
-          <div class="room-tags"><span>S2-Air</span><span>人在传感器</span></div>
-          <div class="room-sections">
-            <section class="room-group">
-              <h4>已购</h4>
-              <ul>
-                <li>报警类传感器，具体分配待定。</li>
-                <li>三开玻璃面板×1、小米面板三开×1、领普顶装人在传感器×1，卫生间按独立人在传感器执行。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>待购</h4>
-              <ul>
-                <li>奥普 S2-Air 智能人感除臭，团购到手约 ¥686。</li>
-                <li>箭牌 M60Pro 智能马桶，需确认坑距 305mm、插座、水压和角阀位置。</li>
-                <li>汉斯格雅 双飞雨360 恒温花洒 + 镀铬境雨手持，放淋浴区。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>待确认</h4>
-              <ul>
-                <li>镜柜、卫浴、插座、防潮和开孔尺寸。</li>
-              </ul>
-            </section>
-          </div>
-          <div class="room-note">深圳冬天不冷，浴霸人感与独立人在传感器配合，用于照明、排风和夜间低亮联动。</div>
-        </article>
-
-        <article class="room-card" data-room-panel="guest-bath">
-          <h3>客卫 <span class="badge">浴霸</span></h3>
-          <div class="room-tags"><span>S2-Air</span><span>扫地机上下水</span></div>
-          <div class="room-sections">
-            <section class="room-group">
-              <h4>已购</h4>
-              <ul>
-                <li>科沃斯 X12 Pro 扫地机器人上下水版，放客卫洗手盆下面。</li>
-                <li>三开玻璃面板×1、小米面板三开×1、领普顶装人在传感器×1，卫生间按独立人在传感器执行。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>待购</h4>
-              <ul>
-                <li>如双卫都装，客卫同样按奥普 S2-Air 执行。</li>
-              </ul>
-            </section>
-            <section class="room-group">
-              <h4>待确认</h4>
-              <ul>
-                <li>镜柜、卫浴、插座、排风和吊顶开孔尺寸。</li>
-                <li>洗手盆柜下上下水、电源和检修空间。</li>
-              </ul>
-            </section>
-          </div>
-          <div class="room-note">扫地机基站不放客厅，统一纳入客卫台盆柜下管理；客卫独立人在传感器用于照明、排风和夜间低亮联动。</div>
-        </article>
-      </div>
-    </section>
-
     <section id="shopping" class="reveal">
       <div class="section-head">
         <div>
@@ -2009,33 +2077,34 @@
       </div>
       <div class="shopping-board">
         <div class="shopping-switch" role="tablist" aria-label="采购分组切换">
-          <button class="shopping-tab active" type="button" role="tab" aria-selected="true" data-shopping-tab="pending">待购 <span class="badge">7 项</span></button>
-          <button class="shopping-tab" type="button" role="tab" aria-selected="false" data-shopping-tab="bought">已购 <span class="badge">15 项</span></button>
-          <button class="shopping-tab" type="button" role="tab" aria-selected="false" data-shopping-tab="later">待考虑 <span class="badge">1 项</span></button>
+          <button class="shopping-tab active" type="button" role="tab" aria-selected="true" data-shopping-tab="pending">待购 <span class="badge">4 项</span></button>
+          <button class="shopping-tab" type="button" role="tab" aria-selected="false" data-shopping-tab="bought">已购 <span class="badge">24 项</span></button>
+          <button class="shopping-tab" type="button" role="tab" aria-selected="false" data-shopping-tab="later">待考虑 <span class="badge">2 项</span></button>
         </div>
 
         <div class="shopping-panels">
           <article class="shopping-column shopping-panel active" data-shopping-panel="pending">
-            <h3>618 待购 <span class="badge">7 项</span></h3>
-            <div class="shopping-subhead">带链接优先</div>
-            <ul class="item-list compact">
-              <li class="item"><div class="item-top"><div><strong>电动床</strong><small>菠萝斑马 硬糖Max 黑胡桃木色 + 黑绷带手工床垫</small></div><a href="https://detail.tmall.com/item.htm?id=988754975130" target="_blank" rel="noreferrer">链接</a></div><p>实木黑胡桃色，适合作为卧室中古锚点，原生米家接入。备选方案 MySide SOLO（美国高端定制）：金绿蓝红 4 区量化睡感、左右半区独立软硬、含独立电机电动床架（双床头分控），床垫/电机 10 年质保、弹簧 30 年；邻居团购 1.5m ¥12,999，1.8m 估 ¥14-16k。</p></li>
-              <li class="item"><div class="item-top"><div><strong>电烤箱</strong><small>博世 W6 天鹅白微蒸烤炸一体机 CPK4R15T8W</small></div><a href="https://s.click.taobao.com/5oo5uVl" target="_blank" rel="noreferrer">链接</a></div><p>58L 大容量，2026.04.28 新品，i-DM 智能混烹（微波加速烤制省时 50%），支持米家/小爱，天鹅白匹配轻中古原木风。备选 COLMO C3 黑珍珠微蒸烤一体机 GQT50-C3（55L 五合一，控湿细雾蒸+APP 自清洁，到手约 ¥5000，面板为黑色需确认适配）。博世价格参考：页面价 8135 − VIP 500 − 限时补贴 15%（最高1500）= 付款 ≤6490；备注【迷住】返现 400 → 到手 ≤6090；叠加家装券后更低。</p></li>
-              <li class="item"><div class="item-top"><div><strong>智能马桶</strong><small>箭牌 M60Pro</small></div><a href="https://s.click.taobao.com/klc1vVl" target="_blank" rel="noreferrer">链接</a></div><p>放主卧套间/主卫，截图款坑距 305mm，需确认主卫坑距、水压、电源。价格参考：直拍 6219.41 − 平台立减 1000 − 88VIP 650 − 国补立减 685.41 = 下单价 3884；确认收货后迷住返家装券 100 → 到手 3784；叠加全品类大套购极限到手约 3589.8 元。店铺赠品：额外赠 6 瓶泡沫液（共 7 瓶）、0 元换购 6 件套、+1 元换购价值 599 元高速吹风机（颜色随机）。</p></li>
-              <li class="item"><div class="item-top"><div><strong>恒温花洒</strong><small>汉斯格雅 双飞雨360 + 镀铬境雨手持</small></div><a href="https://s.click.taobao.com/TNbBvVl" target="_blank" rel="noreferrer">链接</a></div><p>放主卫淋浴区，360mm 顶喷 + 境雨三速手持 + 恒温三出水（含下出水）；林内高端热水器适配。价格参考：直拍 3856 − VIP 400 − 国补 518 = 下单价 ≤2938；确认收货后返家装券 150 → 到手约 2788；叠加全品类大套购后极限约 2641 元。</p></li>
-            </ul>
+            <h3>618 待购 <span class="badge">4 项</span></h3>
             <div class="shopping-subhead">其余待购</div>
             <ul class="item-list compact">
               <li class="item"><div class="item-top"><div><strong>回音壁</strong><small>JBL Cinema 715</small></div></div><p>放客厅电视/投影区，注意预留电源、HDMI/eARC 和走线。</p></li>
-              <li class="item"><div class="item-top"><div><strong>烤箱明装底盒</strong><small>16A 插座配套</small></div></div><p>岛台烤箱插座侧置时需要，避免底盒或插头影响烤箱插入。</p></li>
               <li class="item"><div class="item-top"><div><strong>旋转调光控制器</strong><small>先买 1 个米家兼容无线旋钮测试</small></div></div><p>等灯光安装并接入米家后再买；优先选支持旋转事件、按压开关、可控制灯组/场景的款式，不买传统强电调光旋钮。</p></li>
+              <li class="item"><div class="item-top"><div><strong>洗地机</strong><small>客厅阳台 · 复尺后选型</small></div></div><p>计划放在客厅阳台，先复尺测量可用宽深高、插座/充电位置、排水与收纳空间，再按尺寸和使用频率选择合适机型。</p></li>
+              <li class="item"><div class="item-top"><div><strong>内衣洗衣机</strong><small>主卫 · 复尺后购买</small></div></div><p>放主卫，用于内衣单独清洗；先复尺确认可用宽深高、上下水/排水、电源、防潮和检修空间，再按尺寸选择合适机型。</p></li>
             </ul>
           </article>
 
           <article class="shopping-column shopping-panel" data-shopping-panel="bought">
-            <h3>已购 <span class="badge">16 项</span></h3>
+            <h3>已购 <span class="badge">26 项</span></h3>
             <ul class="item-list compact">
-              <li class="item"><div class="item-top"><div><strong>浴霸</strong><small>奥普 S2-Air 智能人感除臭</small></div></div><p>已购，主卫使用；卫生间吊顶为石膏板，需配套<strong>转换框</strong>把奥普集成吊顶尺寸（300×600）转接到石膏板开孔，安装时让师傅一并预订/订做。浴霸自带人感可辅助；卫生间仍按独立人在传感器做照明/排风联动。</p></li>
+              <li class="item"><div class="item-top"><div><strong>烤箱明装底盒</strong><small>16A 插座配套</small></div></div><p>岛台烤箱插座侧置已购。</p></li>
+              <li class="item"><div class="item-top"><div><strong>全屋定制灯带控制器</strong><small>需米家控制</small></div></div><p>用于全屋定制灯带接入米家控制；已购，确认与灯带电压/类型匹配，支持米家 App、小爱/场景联动。</p></li>
+              <li class="item"><div class="item-top"><div><strong>餐边柜内嵌轨道插</strong><small>已购</small></div></div><p>计划放餐边柜，已确认可装并下单。</p></li>
+              <li class="item"><div class="item-top"><div><strong>电动床</strong><small>MySide SOLO</small></div></div><p>已购 MySide SOLO（美国高端定制）：金绿蓝红 4 区量化睡感、左右半区独立软硬、含独立电机电动床架（双床头分控），床垫/电机 10 年质保、弹簧 30 年。</p></li>
+              <li class="item"><div class="item-top"><div><strong>电烤箱</strong><small>COLMO CGT T501 云璃白</small></div></div><p>已购 COLMO 嵌入式微蒸烤，匹配风格与功能需求。</p></li>
+              <li class="item"><div class="item-top"><div><strong>浴霸</strong><small>奥普 S2-Air 智能人感除臭</small></div></div><p>已购，主卫使用；卫生间吊顶为石膏板，需配套<strong>转换框</strong>把奥普集成吊顶尺寸（300×600）转接到石膏板开孔，安装时让师傅一并预订/订做。主卫先观察浴霸自带人感；公卫入口处另装领普人在传感器做有人自动开灯。</p></li>
+              <li class="item"><div class="item-top"><div><strong>智能马桶</strong><small>九牧净界 8 系 Ultra-ZS860</small></div><a href="https://u.jd.com/R1zgsc6" target="_blank" rel="noreferrer">链接</a></div><p>已购 ¥3555，放主卧套间/主卫，按旗舰主卫款执行。核心关注净味、除菌、自清洁、移动烘干等配置；安装前复核主卫 305/400 坑距、电源插座、防水盒、水压、角阀位置、自动翻盖感应距离，以及免费安装拆旧清运和防霉胶服务。</p></li>
+              <li class="item"><div class="item-top"><div><strong>恒温花洒</strong><small>汉斯格雅 双飞雨360 + 镀铬境雨手持</small></div><a href="https://s.click.taobao.com/TNbBvVl" target="_blank" rel="noreferrer">链接</a></div><p>已购 ¥2935，放主卫淋浴区；360mm 顶喷 + 境雨三速手持 + 恒温三出水（含下出水），林内高端热水器适配。</p></li>
               <li class="item"><div class="item-top"><div><strong>摄像机</strong><small>小米 4K ×3</small></div></div><p>已购 3 台：门外过道用小米智能室外摄像机 4 4K，优先接网线；家里新增小米智能摄像机 4 4K，另保留已提前购买的室内摄像机。</p></li>
               <li class="item"><div class="item-top"><div><strong>智能插线板</strong><small>已购</small></div></div><p>米家生态备用电源控制。</p></li>
               <li class="item"><div class="item-top"><div><strong>灯带</strong><small>已购/已接入</small></div></div><p>卧室、主卧、希希房间、阳台、客厅投影等灯带已在米家内；低压灯带本次采购也已下单。</p></li>
@@ -2043,9 +2112,9 @@
               <li class="item"><div class="item-top"><div><strong>低压灯带</strong><small>已购，共约 23m</small></div></div><p>设计师明细：客厅 6.4m、客厅阳台 4m、儿童房 2.2m、主卧 2.7m、公卫 1.8m、主卫 1.8m。</p></li>
               <li class="item"><div class="item-top"><div><strong>筒灯 / 射灯</strong><small>普瑞 1735 已定</small></div></div><p>已按 1735 芯片方案下单，3000K-6000K 可调；报告页已整理到下方灯光测试报告，后续按空间做场景联动。</p></li>
               <li class="item"><div class="item-top"><div><strong>中枢网关</strong><small>小米</small></div></div><p>已覆盖网关能力，中控屏 Max 非刚需。</p></li>
-              <li class="item"><div class="item-top"><div><strong>空调 VRF</strong><small>中弘 B19 Mesh 2.0 Pro 一拖五</small></div></div><p>日立中央空调接入米家。</p></li>
+              <li class="item"><div class="item-top"><div><strong>空调 VRF</strong><small>中弘 B19 Mesh 2.0 Pro 一拖五</small></div></div><p>日立中央空调接入米家。安装教程：<a href="https://www.bilibili.com/video/BV1JzMVzkEj6/?spm_id_from=333.337.search-card.all.click&amp;vd_source=d7313d3be5bc3281b7cfcfe10354c3f8" target="_blank" rel="noreferrer">B站《真正全流程完整介绍 VRF 中央空调控制器安装》</a>。</p></li>
               <li class="item"><div class="item-top"><div><strong>智能门锁</strong><small>小米智能门锁 M40 Pro</small></div></div><p>后续可联动离家/回家模式。</p></li>
-              <li class="item"><div class="item-top"><div><strong>人在/报警类传感器</strong><small>已购</small></div></div><p>厨房 1 个，主卫和客卫各 1 个；安防类传感器另按空间分配，用于照明、排风和夜间低亮联动。</p></li>
+              <li class="item"><div class="item-top"><div><strong>人在/报警类传感器</strong><small>已购</small></div></div><p>领普顶装人在传感器按厨房 ×1、餐厅 ×1、公卫 ×1 分配；餐厅头顶用于有人自动感知，公卫入口处用于有人自动开灯。主卫先观察浴霸自带人感效果，不好用再补装独立人在传感器。</p></li>
               <li class="item"><div class="item-top"><div><strong>扫地机器人</strong><small>科沃斯 X12 Pro 上下水版</small></div></div><p>放客卫洗手盆下面，需确认上下水、电源和检修空间。</p></li>
               <li class="item"><div class="item-top"><div><strong>小爱音箱</strong><small>Xiaomi 智能音箱 Pro</small></div></div><p>截图显示已接入路由器设备管理，可作为语音入口。</p></li>
               <li class="item"><div class="item-top"><div><strong>主路由器</strong><small>小米 BE7200 Pro</small></div></div><p>已购，放客厅中央空调检修口；4 个全 2.5G 网口，承接光猫、回弱电箱交换机、NAS 和预留高速设备。</p></li>
@@ -2210,10 +2279,232 @@
           <div class="device-chip"><b>Xiaomi 中枢网关</b><span>米家本地中枢</span></div>
           <div class="device-chip"><b>智能灯带</b><span>卧室/主卧/阳台/投影区</span></div>
           <div class="device-chip"><b>智能墙壁插座</b><span>希希房间</span></div>
-          <div class="device-chip"><b>领普顶装人在传感器 ×3</b><span>厨房 ×1 / 主卫 ×1 / 客卫 ×1</span></div>
+          <div class="device-chip"><b>领普顶装人在传感器 ×3</b><span>厨房 ×1 / 餐厅 ×1 / 公卫 ×1</span></div>
           <div class="device-chip"><b>直流变频落地扇 E</b><span>风扇联动场景</span></div>
         </div>
       </article>
+    </section>
+
+    <section id="switches" class="reveal">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Switch Layout</div>
+          <h2>开关分布与安装位置</h2>
+        </div>
+        <p class="section-note">编号对位《设计图-1203.pdf · PL-09 开关图》。共 35 号位，安装高度统一 H=1.3m；小米智能面板需区分实体按键版与全面屏版，避免装错位置。</p>
+      </div>
+      <div class="install-card">
+        <h3><span>设计图编号 → 房间 / 控制对象 / 已购型号</span><span class="spec-meta">PL-09 / H=1.3m</span></h3>
+        <div class="track-table">
+          <div class="track-group-head">客餐厅 / 玄关 / 过道 <span class="badge">01/05/12 + 32/03/04 进门 + 08/09 窗帘 + 02/06/07 + 03/04 过道 + 餐边柜水龙头/水浸/轨道插 + 餐厅人在传感器</span></div>
+          <div class="track-row">
+            <div class="track-room"><b>01、05、12（门口）</b><span>客餐厅 · 入户主控墙三联</span></div>
+            <div class="track-size"><b>小米智能面板三开×1（实体按键版）</b><span>入户门内右手第一联（双控起点 / 场景入口）</span></div>
+            <div class="track-box"><b>客厅主灯 / 玄关筒灯 / 餐厅吊灯</b><span>米家场景</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>01、05、12（另一侧）</b><span>客餐厅 · 同号双控终点</span></div>
+            <div class="track-size"><b>平头熊带字三开×1</b><span>客餐厅另一侧墙（双控终点）</span></div>
+            <div class="track-box"><b>客厅主灯 / 玄关筒灯 / 餐厅吊灯</b><span>带字识别 · 与门口面板同号双控</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>32、03、04（进门）</b><span>玄关 / 入户三联底盒</span></div>
+            <div class="track-size"><b>小米双开×1</b><span>3 编号 → 2 键：03、04 灯具编组合并为 1 键，32 单走 1 键</span></div>
+            <div class="track-box"><b>32 厨房主灯（同号双控）/ 03、04 过道（同号双控）</b><span>32 与厨房/主卫同号；03、04 与过道 03/04 同号</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>08、09</b><span>客餐厅窗帘位</span></div>
+            <div class="track-size"><b>平头熊四开窗帘×1</b><span>阳台/餐厅窗位</span></div>
+            <div class="track-box"><b>布帘 / 纱帘 / 灯带 / 备用</b><span>4 开 · 零火线引底盒</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>02、06、07（过道）</b><span>客餐厅过道三联</span></div>
+            <div class="track-size"><b>平头熊三开×1</b><span>过道墙面</span></div>
+            <div class="track-box"><b>过道照明 / 辅助回路</b><span>三键 · 单控</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>03、04（过道）</b><span>客餐厅过道双联</span></div>
+            <div class="track-size"><b>平头熊三开×1</b><span>2 编号 → 3 键：第 3 键预留场景按键（一键全关 / 夜灯模式等）</span></div>
+            <div class="track-box"><b>过道照明 / 辅助 / 场景预留</b><span>与进门 03/04 同号双控</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>餐厅餐边柜（非开关项）</b><span>水龙头安装</span></div>
+            <div class="track-size"><b>已购水龙头×1</b><span>需师傅安装 · 提前确认进出水管位与角阀</span></div>
+            <div class="track-box"><b>餐边柜小水槽 / 备餐区</b><span>定制柜进场前预留进出水接口</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>餐厅餐边柜（非开关项）</b><span>米家水浸卫士</span></div>
+            <div class="track-size"><b>水浸卫士×1</b><span>放置于餐边柜水槽下方柜内地面 · 电池供电</span></div>
+            <div class="track-box"><b>漏水报警 → 米家联动</b><span>与厨房水浸联动同一规则</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>餐厅餐边柜（非开关项）</b><span>内嵌轨道插</span></div>
+            <div class="track-size"><b>待定制确认</b><span>确认柜体结构、背板厚度、开槽尺寸和走线方式</span></div>
+            <div class="track-box"><b>小电器供电 / 备餐区</b><span>若可装，需提前预留电源进线、安装槽和检修空间</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>餐厅头顶（非开关项）</b><span>领普顶装人在传感器</span></div>
+            <div class="track-size"><b>领普顶装×1</b><span>安装在餐厅头顶</span></div>
+            <div class="track-box"><b>有人自动感知</b><span>后续联动餐厅灯光 / 场景</span></div>
+          </div>
+          <div class="track-group-head">书房（多功能房） <span class="badge">10/11 智能面板 + 窗帘待定</span></div>
+          <div class="track-row">
+            <div class="track-room"><b>10、11</b><span>书房（多功能房）门口</span></div>
+            <div class="track-size"><b>小米智能面板三开×1（全面屏无实体按键版）</b><span>多功能房门内侧（含 10/11 + 备用一路）</span></div>
+            <div class="track-box"><b>主灯 / 灯带 / 备用</b><span>米家场景</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>书房（多功能房）窗帘</b><span>—</span></div>
+            <div class="track-size"><b>待定</b><span>等用户后续口径</span></div>
+            <div class="track-box"><b>窗帘开关待定</b><span>—</span></div>
+          </div>
+          <div class="track-group-head">儿童房 <span class="badge">20/21/22 双控同号 + 窗帘待定</span></div>
+          <div class="track-row">
+            <div class="track-room"><b>20、21、22（靠门）</b><span>儿童房门口三联</span></div>
+            <div class="track-size"><b>平头熊带字三开×1</b><span>儿童房门内侧（双控起点）</span></div>
+            <div class="track-box"><b>主灯 / 灯带 / 窗帘</b><span>带字识别</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>20、21、22（靠窗）</b><span>儿童房床头/靠窗三联</span></div>
+            <div class="track-size"><b>小米智能面板三开×1（全面屏无实体按键版）</b><span>靠窗一侧（双控终点）</span></div>
+            <div class="track-box"><b>主灯 / 床头灯 / 灯带</b><span>米家场景 · 与靠门带字三开同号双控</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>儿童房窗帘</b><span>—</span></div>
+            <div class="track-size"><b>待定</b><span>等用户后续口径</span></div>
+            <div class="track-box"><b>窗帘开关待定</b><span>—</span></div>
+          </div>
+          <div class="track-group-head">长辈房 <span class="badge">18/19 双控同号 + 窗帘待定</span></div>
+          <div class="track-row">
+            <div class="track-room"><b>18、19（门口）</b><span>长辈房门外双联</span></div>
+            <div class="track-size"><b>小米普通双开×1</b><span>长辈房门口（双控起点）</span></div>
+            <div class="track-box"><b>主灯 / 门口灯</b><span>双键</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>18、19（房内）</b><span>长辈房床头</span></div>
+            <div class="track-size"><b>小米智能三开×1（实体按键版）</b><span>床头一侧（双控终点；含主灯/灯带/备用）</span></div>
+            <div class="track-box"><b>主灯 / 灯带 / 备用</b><span>米家场景 · 与门口双开同号双控</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>长辈房窗帘</b><span>—</span></div>
+            <div class="track-size"><b>待定</b><span>等用户后续口径</span></div>
+            <div class="track-box"><b>窗帘开关待定</b><span>—</span></div>
+          </div>
+          <div class="track-group-head">主卧 <span class="badge">23/24/25 双控同号 + 26-28、29-31 双场景面板（均不控灯/窗帘）</span></div>
+          <div class="track-row">
+            <div class="track-room"><b>23、24、25（门口）</b><span>主卧门外三联</span></div>
+            <div class="track-size"><b>平头熊带字三开×1</b><span>主卧门内右手第一联（双控起点）</span></div>
+            <div class="track-box"><b>主灯 / 灯带 / 氛围场景</b><span>带字识别</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>23、24、25（靠窗）</b><span>主卧靠窗 · 绿色"改为智能面板"</span></div>
+            <div class="track-size"><b>小米智能面板三开×1（全面屏无实体按键版）</b><span>靠窗一侧（双控终点 / 场景入口）</span></div>
+            <div class="track-box"><b>主灯 / 灯带 / 氛围场景</b><span>米家场景 · 与门口带字三开同号双控</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>26、27、28</b><span>主卧 · 场景控制墙</span></div>
+            <div class="track-size"><b>平头熊四开×1（纯场景面板）</b><span>开关备货富余 · 4 键全部映射米家场景，不直接控灯</span></div>
+            <div class="track-box"><b>睡眠 / 观影 / 办公 / 起夜（自定义）</b><span>米家无线场景 · 联动灯组 + 窗帘 + 空调</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>29、30、31</b><span>主卧 · 场景控制墙（窗帘位）</span></div>
+            <div class="track-size"><b>平头熊四开×1（纯场景面板）</b><span>开关备货富余 · 4 键全部映射米家场景，不直接控灯/窗帘</span></div>
+            <div class="track-box"><b>晨起 / 阅读 / 离家 / 全关（自定义）</b><span>米家无线场景 · 联动灯组 + 窗帘 + 空调</span></div>
+          </div>
+          <div class="track-group-head">主卫 <span class="badge">32 浴霸自带开关 + 33-35 普通三开 + 顶装传感器待定 + 转换框已购</span></div>
+          <div class="track-row">
+            <div class="track-room"><b>32</b><span>主卫干区 · 浴霸位</span></div>
+            <div class="track-size"><b>浴霸自带开关×1</b><span>奥普 S2-Air 配套四键面板（暖风/换气/照明/吹风）</span></div>
+            <div class="track-box"><b>浴霸暖风 / 换气 / 浴霸照明 / 吹风</b><span>不再走小米 · 与厨房/进门 32 的同号双控关系解除</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>33、34、35</b><span>主卫干区三联</span></div>
+            <div class="track-size"><b>小米普通三开×1</b><span>主卫门外干区（与 32 同墙）</span></div>
+            <div class="track-box"><b>主灯 / 镜前灯 / 排风（或备用）</b><span>浴霸相关已并入 32 浴霸面板</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>主卫</b><span>领普顶装人在传感器</span></div>
+            <div class="track-size"><b>待定</b><span>等浴霸自带传感器实测后再决定</span></div>
+            <div class="track-box"><b>顶装传感器待定</b><span>浴霸已含人在传感，若不好用再补装领普</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>主卫</b><span>浴霸转换框</span></div>
+            <div class="track-size"><b>已购（奥普 S2-Air 配套转换框×1）</b><span>⚠️ 必须先装转换框，再上浴霸主体</span></div>
+            <div class="track-box"><b>石膏板吊顶 → 集成吊顶 300×600 接口</b><span>提醒吊顶/浴霸师傅按顺序施工</span></div>
+          </div>
+          <div class="track-group-head">公卫 <span class="badge">14 浴霸自带开关 + 15-17 普通三开 + 公卫入口处人在传感器 + 转换框已购</span></div>
+          <div class="track-row">
+            <div class="track-room"><b>14</b><span>公卫干区 · 浴霸位</span></div>
+            <div class="track-size"><b>浴霸自带开关×1</b><span>浴霸配套四键面板（暖风/换气/照明/吹风）</span></div>
+            <div class="track-box"><b>浴霸暖风 / 换气 / 浴霸照明 / 吹风</b><span>不再走小米智能面板 · 不参与米家场景</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>15、16、17</b><span>公卫干区三联</span></div>
+            <div class="track-size"><b>小米普通三开×1</b><span>公卫门外干区（与 14 同墙）</span></div>
+            <div class="track-box"><b>主灯 / 镜前灯 / 排风（或备用）</b><span>浴霸相关已并入 14 浴霸面板</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>公卫入口处</b><span>领普顶装人在传感器</span></div>
+            <div class="track-size"><b>领普顶装×1</b><span>安装在公卫入口处</span></div>
+            <div class="track-box"><b>有人自动开灯</b><span>后续可扩展排风 / 夜间低亮联动</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>公卫</b><span>浴霸转换框</span></div>
+            <div class="track-size"><b>已购（公卫浴霸配套转换框×1）</b><span>⚠️ 必须先装转换框，再上浴霸主体</span></div>
+            <div class="track-box"><b>石膏板吊顶 → 集成吊顶接口</b><span>提醒吊顶/浴霸师傅按顺序施工</span></div>
+          </div>
+          <div class="track-group-head">厨房 <span class="badge">32 小米智能开关 + 手扫开关 + 顶装传感器 + 水龙头/烟感/水浸</span></div>
+          <div class="track-row">
+            <div class="track-room"><b>32（厨房入口）</b><span>厨房主灯 · 双控终点</span></div>
+            <div class="track-size"><b>小米智能开关×1（实体按键版）</b><span>厨房入口干区墙（与进门 32 同号双控；主卫 32 已退出）</span></div>
+            <div class="track-box"><b>厨房主灯</b><span>米家联动 · 两点同号双控</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>厨房炒菜区</b><span>—</span></div>
+            <div class="track-size"><b>手扫开关×1</b><span>水槽前吊柜底/操作台下方</span></div>
+            <div class="track-box"><b>操作台 LED 补光</b><span>湿手免触</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>厨房</b><span>领普顶装人在传感器</span></div>
+            <div class="track-size"><b>领普顶装×1</b><span>吊顶就近</span></div>
+            <div class="track-box"><b>照明/排风联动</b><span>无墙开关</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>厨房水槽（非开关项）</b><span>水龙头安装</span></div>
+            <div class="track-size"><b>已购水龙头×1</b><span>需师傅安装 · 提前确认进出水管位与角阀</span></div>
+            <div class="track-box"><b>厨房水槽冷热水</b><span>橱柜进场前预留进出水接口</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>厨房（非开关项）</b><span>米家烟感卫士</span></div>
+            <div class="track-size"><b>烟感卫士×1</b><span>吸顶安装 · 电池供电 · 米家无线接入</span></div>
+            <div class="track-box"><b>烟雾报警 → 米家联动</b><span>位置避开炉灶正上方 1m 内（防误报），靠近厨房中央或回风口</span></div>
+          </div>
+          <div class="track-row">
+            <div class="track-room"><b>厨房（非开关项）</b><span>米家水浸卫士</span></div>
+            <div class="track-size"><b>水浸卫士×1</b><span>放置于水槽下方柜内地面 · 电池供电</span></div>
+            <div class="track-box"><b>漏水报警 → 米家联动</b><span>建议联动关闭进水阀（如有智能阀）/ 推送告警</span></div>
+          </div>
+        </div>
+        <ul class="check-list">
+          <li><b>图纸图例</b>单联单控/双联单控/三联单控/四联单控/双联双控/单联双控开关，安装高度统一 <b>H=1.3m</b>。</li>
+          <li><b>品牌聚合美学</b>同一墙面/同一房间内尽量"小米和小米放一起、平头熊和平头熊放一起"，外观一致优先于按键利用率。</li>
+          <li><b>编号 ≠ 按键数（已确认）</b>当编号数与开关键数不一致时，由用户灯具编组与场景策略消化，无需复核：① 进门 32/03/04（3 编号 → 小米双开 2 键）：03、04 灯具合并为 1 键，32 单走 1 键；② 过道 03/04（2 编号 → 平头熊三开 3 键）：第 3 键留作场景按键；③ 主卧 26/27/28、29/30/31（各 3 编号 → 平头熊四开 4 键）：开关备货富余，**两组均改为纯米家场景面板，不直接驱动灯具/窗帘**，按键映射睡眠/观影/办公/起夜/晨起/阅读/离家/全关等场景。</li>
+          <li><b>主卧场景面板底盒走线</b>26/27/28、29/30/31 两个底盒只取 220V 零火即可，**不需要再拉灯具控制线进盒**；若 PL-09 已有灯线进入，请师傅在底盒内做绝缘端接（封死）并标记，避免后期误接。</li>
+          <li><b>小米智能面板安装纠错</b>共 6 处，分两类安装，不能混装：① <b>实体按键版 ×3</b>：入户门口 01/05/12、长辈房 18/19（房内）、厨房 32；② <b>全面屏无实体按键版 ×3</b>：书房 10/11、主卧 23/24/25（靠窗）、儿童房 20/21/22（靠窗）。<b>公卫 14 已改为浴霸自带开关，不再走小米智能面板。</b></li>
+          <li><b>双控同号</b>同一组编号在图纸上出现两次代表共控同一回路：① 01/05/12（客餐厅门口智能面板 ↔ 另一侧带字三开）② 18/19（长辈房门口双开 ↔ 房内智能三开）③ 20/21/22（儿童房靠门带字三开 ↔ 靠窗智能面板）④ 23/24/25（主卧门口带字三开 ↔ 靠窗智能面板）⑤ 32（进门 32/03/04 小米双开 ↔ 厨房 32 小米智能开关，两点同号；<b>主卫 32 已改为浴霸自带开关，退出同号链</b>）⑥ 03、04（进门小米双开 ↔ 客餐厅过道平头熊三开）。</li>
+          <li><b>平头熊四开</b>共 3 个已确定：客餐厅 08/09（窗帘）、主卧 26/27/28（纯场景面板）、主卧 29/30/31（纯场景面板）；待定 3 个：儿童房 / 长辈房 / 书房（多功能房）窗帘四开；电机零火线引到对应底盒，不要用强电调光器。</li>
+          <li><b>主卫</b>= 32（浴霸自带开关）+ 33、34、35（小米普通三开 · 主灯/镜前灯/排风）；顶装传感器待定（浴霸已含人在传感，先观察效果，不好用再补装领普）。</li>
+          <li><b>公卫 / 客卫</b>= 14（浴霸自带开关）+ 15、16、17（小米普通三开 · 主灯/镜前灯/排风）+ 公卫入口处领普人在传感器 ×1（有人自动开灯）。</li>
+          <li><b>浴霸转换框（已购 · 主卫 + 公卫 各 1 个）</b>石膏板吊顶必须**先装转换框，再装浴霸主体**——施工顺序：吊顶完成 → 师傅按浴霸开孔尺寸切割并预埋转换框 → 浴霸到货后再扣装。安装当天提醒吊顶班 / 浴霸班核对：① 转换框已到货且与浴霸型号匹配（主卫为奥普 S2-Air 配套，公卫为对应品牌配套）；② 开孔位置中心对准浴霸出风口；③ 框边与石膏板齐平、密封不漏风。</li>
+          <li><b>领普顶装人在传感器</b>已确认 3 个：厨房 ×1（吊顶就近）、餐厅 ×1（餐厅头顶，有人自动感知）、公卫 ×1（公卫入口处，有人自动开灯）；主卫顶装传感器待定——等浴霸自带传感器实测，不好用再补装。</li>
+          <li><b>非开关项 · 米家无线传感器（已购）</b>烟感卫士 ×1（厨房）+ 水浸卫士 ×2（厨房水槽下、餐厅餐边柜下）：均吸顶/落地放置、无需墙线，用前先在米家 App 配网；烟感避开炉灶正上方；水浸建议在米家自动化里联动"推送 + 关闭智能阀（如有）"。</li>
+          <li><b>非开关项 · 水龙头（已购）</b>厨房 ×1、餐厅餐边柜 ×1：橱柜 / 餐边柜进场前需提前预留冷热水管位与角阀，水路改造阶段确认到位再封板，避免后期返工。</li>
+          <li><b>非开关项 · 餐边柜内嵌轨道插（待定制确认）</b>计划放在餐边柜，先等全屋定制确认是否能装；重点确认柜体结构、背板厚度、开槽尺寸、散热/防水距离、强电进线和检修空间。</li>
+          <li><b>非开关项 · 全屋定制灯带控制器（待购）</b>全屋定制灯带需要安装可米家控制的控制器；下单前确认灯带电压、色温/调光类型、功率余量、安装位置可检修，并与灯带电源驱动、控制器接线方式匹配。</li>
+          <li><b>中宏 B19 Mesh 2.0 Pro</b>放主卧空调检修口（H-Link 通讯总线、220V 电源、Wi-Fi 三要素齐全），与从路由同位；不占开关回路。</li>
+          <li><b>待梳理（用户后续确认）</b>阳台主灯口径；儿童房 / 长辈房 / 书房 三处窗帘开关。</li>
+        </ul>
+      </div>
     </section>
 
     <section id="install" class="reveal">
@@ -2222,7 +2513,7 @@
           <div class="kicker">Installation Notes</div>
           <h2>安装参数卡片</h2>
         </div>
-        <p class="section-note">岛台烤箱与全屋窗帘的关键安装参数。</p>
+        <p class="section-note">岛台烤箱、全屋窗帘与门体修复的关键安装参数。</p>
       </div>
       <div class="spec-grid">
         <article class="install-card spec-card">
@@ -2276,6 +2567,16 @@
             <li>电源预留方向、安装尺寸、左右回边和最终轨道长度仍以现场复尺为准。</li>
           </ul>
         </article>
+
+        <article class="install-card spec-card">
+          <h3><span>门体修复</span><span class="spec-meta">一屋一景安装注意</span></h3>
+          <ul class="check-list">
+            <li>现场让师傅修复门的问题，重点检查门扇、合页、门套、闭合顺畅度和门缝。</li>
+            <li>需要增加门吸/门挡/限位器，避免门被风吹动后猛烈甩开或撞墙。</li>
+            <li>门吸位置以不影响通行、家具摆放和踢脚线收口为准，优先选隐蔽、稳固、可检修的位置。</li>
+            <li>外面门是否也需要加门吸/限位器待现场确认：如果有穿堂风、门易回弹或容易撞墙，就同步加装。</li>
+          </ul>
+        </article>
       </div>
     </section>
   </main>
@@ -2290,29 +2591,36 @@
   </div>
 
   <script>
+    /* ====== 已完成自动归档：> 7 天的 [data-completed-date] 折叠到 <details> ====== */
+    (function archiveOldCompleted() {
+      const NOW = new Date();
+      const SEVEN_DAYS = 7 * 24 * 60 * 60 * 1000;
+      // 按容器分组归档（每个 [data-progress-completed] 独立一个折叠块）
+      document.querySelectorAll("[data-progress-completed]").forEach((container) => {
+        const items = Array.from(container.querySelectorAll("[data-completed-date]"));
+        const stale = items.filter((el) => {
+          const d = new Date(el.dataset.completedDate);
+          return !isNaN(d) && (NOW - d) > SEVEN_DAYS;
+        });
+        if (stale.length === 0) return;
+        const details = document.createElement("details");
+        details.className = "progress-archive";
+        const summary = document.createElement("summary");
+        summary.textContent = `历史已完成（${stale.length} 项，超过一周已折叠）`;
+        details.appendChild(summary);
+        const innerList = document.createElement("div");
+        innerList.className = "progress-list";
+        stale.forEach((el) => innerList.appendChild(el));
+        details.appendChild(innerList);
+        container.appendChild(details);
+      });
+    })();
+
     const modal = document.getElementById("imageModal");
     const modalImage = modal.querySelector("img");
     const closeButton = modal.querySelector("button");
-    const roomTabs = document.querySelectorAll("[data-room-tab]");
-    const roomPanels = document.querySelectorAll("[data-room-panel]");
     const shoppingTabs = document.querySelectorAll("[data-shopping-tab]");
     const shoppingPanels = document.querySelectorAll("[data-shopping-panel]");
-
-    roomTabs.forEach((tab) => {
-      tab.addEventListener("click", () => {
-        const target = tab.dataset.roomTab;
-
-        roomTabs.forEach((item) => {
-          const isActive = item === tab;
-          item.classList.toggle("active", isActive);
-          item.setAttribute("aria-selected", String(isActive));
-        });
-
-        roomPanels.forEach((panel) => {
-          panel.classList.toggle("active", panel.dataset.roomPanel === target);
-        });
-      });
-    });
 
     shoppingTabs.forEach((tab) => {
       tab.addEventListener("click", () => {
